@@ -12,7 +12,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('E Commerce App')),
+      appBar: AppBar(title: const Text('Application E Commerce')),
       drawer: const AppDrawer(),
       body: const Center(child: Text('TODO: Contenu de la page d\'accueil')),
     );

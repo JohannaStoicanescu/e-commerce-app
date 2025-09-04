@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
 
-  void _go(BuildContext context, String route) {
+  void _goRouter(BuildContext context, String route) {
     Navigator.pop(context);
     final current = ModalRoute.of(context)?.settings.name;
     if (current == route) return;
@@ -63,19 +63,34 @@ class AppDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.home),
             title: const Text('Accueil'),
-            onTap: () => _go(context, '/'),
+            onTap: () => _goRouter(context, '/'),
+          ),
+          ListTile(
+            leading: const Icon(Icons.list),
+            title: const Text('Catalogue'),
+            onTap: () => _goRouter(context, '/catalog'),
+          ),
+          ListTile(
+            leading: const Icon(Icons.shopping_cart),
+            title: const Text('Panier'),
+            onTap: () => _goRouter(context, '/cart'),
+          ),
+          ListTile(
+            leading: const Icon(Icons.assignment),
+            title: const Text('Historique des commandes'),
+            onTap: () => _goRouter(context, '/orders'),
           ),
           const Divider(),
           if (user == null) ...[
             ListTile(
               leading: const Icon(Icons.login, color: Colors.green),
               title: const Text('Se connecter'),
-              onTap: () => _go(context, '/login'),
+              onTap: () => _goRouter(context, '/login'),
             ),
             ListTile(
               leading: const Icon(Icons.person_add, color: Colors.blue),
               title: const Text('S\'inscrire'),
-              onTap: () => _go(context, '/register'),
+              onTap: () => _goRouter(context, '/register'),
             ),
           ] else ...[
             ListTile(
