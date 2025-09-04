@@ -7,6 +7,7 @@ import 'pages/checkout_page.dart';
 import 'pages/home_page.dart';
 import 'pages/login_page.dart';
 import 'pages/orders_page.dart';
+import 'pages/product_page.dart';
 import 'pages/register_page.dart';
 
 void main() async {
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
         '/cart': (_) => const CartPage(),
         '/checkout': (_) => const CheckoutPage(),
         '/orders': (_) => const OrdersPage(),
+        '/product/:name': (_) => const ProductPage(),
         '/login': (_) => const LoginPage(),
         '/register': (_) => const RegisterPage(),
       },
