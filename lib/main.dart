@@ -7,6 +7,7 @@ import 'pages/checkout_page.dart';
 import 'pages/home_page.dart';
 import 'pages/login_page.dart';
 import 'pages/orders_page.dart';
+import 'pages/product_page.dart';
 import 'pages/register_page.dart';
 
 void main() async {
@@ -40,6 +41,39 @@ class MyApp extends StatelessWidget {
         '/orders': (_) => const OrdersPage(),
         '/login': (_) => const LoginPage(),
         '/register': (_) => const RegisterPage(),
+      },
+      onGenerateRoute: (RouteSettings settings) {
+        final uri = Uri.parse(settings.name ?? '');
+
+        if (uri.pathSegments.length == 2 &&
+            uri.pathSegments.first == 'product') {
+          final slug = uri.pathSegments[1];
+
+          final product = settings.arguments as Product?;
+
+          if (product == null) {
+            return MaterialPageRoute<void>(
+              builder: (_) => Scaffold(
+                appBar: AppBar(title: const Text('Produit introuvable')),
+                body: Center(child: Text('Aucun produit fourni pour "$slug".')),
+              ),
+              settings: settings,
+            );
+          }
+
+          return MaterialPageRoute<void>(
+            builder: (_) => ProductPage(product: product),
+            settings: settings,
+          );
+        }
+
+        return MaterialPageRoute<void>(
+          builder: (_) => Scaffold(
+            appBar: AppBar(title: const Text('Page non trouvée')),
+            body: Center(child: Text('Route inconnue : ${settings.name}')),
+          ),
+          settings: settings,
+        );
       },
     );
   }
