@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import '../helpers/slugify.dart';
 import '../viewmodels/products_viewmodel.dart';
 import '../viewmodels/cart_viewmodel.dart';
 import '../widgets/drawer.dart';
@@ -18,7 +19,7 @@ class ProductsPage extends StatefulWidget {
 class _ProductsPageState extends State<ProductsPage> {
   final TextEditingController _searchController = TextEditingController();
   String _searchQuery = '';
-  String _selectedCategory = 'Toutes';
+  final Set<String> _selectedCategories = <String>{};
   double _minPrice = 0;
   double _maxPrice = 1000;
   double _minRating = 0;
@@ -84,7 +85,7 @@ class _ProductsPageState extends State<ProductsPage> {
 
   bool _hasActiveFilters() {
     return _searchQuery.isNotEmpty ||
-        _selectedCategory != 'Toutes' ||
+        _selectedCategories.isNotEmpty ||
         _minPrice > 0 ||
         _maxPrice < 1000 ||
         _minRating > 0;
@@ -94,7 +95,7 @@ class _ProductsPageState extends State<ProductsPage> {
     setState(() {
       _searchController.clear();
       _searchQuery = '';
-      _selectedCategory = 'Toutes';
+      _selectedCategories.clear();
       _minPrice = 0;
       _maxPrice = 1000;
       _minRating = 0;
@@ -171,17 +172,29 @@ class _ProductsPageState extends State<ProductsPage> {
   }
 
   Widget _buildCategoryFilter(ProductsViewModel viewModel) {
-    final categories = [
-      'Toutes',
-      ...viewModel.products.map((p) => p.category).toSet()
-    ];
+    final categories =
+        viewModel.products.map((p) => p.category).toSet().toList();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Catégorie',
-          style: TextStyle(fontWeight: FontWeight.bold),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text(
+              'Catégories',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            if (_selectedCategories.isNotEmpty)
+              TextButton(
+                onPressed: () {
+                  setState(() {
+                    _selectedCategories.clear();
+                  });
+                },
+                child: const Text('Tout désélectionner'),
+              ),
+          ],
         ),
         const SizedBox(height: 8),
         Wrap(
@@ -189,15 +202,30 @@ class _ProductsPageState extends State<ProductsPage> {
           children: categories.map((category) {
             return FilterChip(
               label: Text(category),
-              selected: _selectedCategory == category,
+              selected: _selectedCategories.contains(category),
               onSelected: (selected) {
                 setState(() {
-                  _selectedCategory = category;
+                  if (selected) {
+                    _selectedCategories.add(category);
+                  } else {
+                    _selectedCategories.remove(category);
+                  }
                 });
               },
             );
           }).toList(),
         ),
+        if (_selectedCategories.isNotEmpty) ...[
+          const SizedBox(height: 8),
+          Text(
+            '${_selectedCategories.length} catégorie(s) sélectionnée(s)',
+            style: TextStyle(
+              fontSize: 12,
+              color: Colors.grey[600],
+              fontStyle: FontStyle.italic,
+            ),
+          ),
+        ],
       ],
     );
   }
@@ -357,8 +385,8 @@ class _ProductsPageState extends State<ProductsPage> {
         if (!titleMatch && !categoryMatch) return false;
       }
 
-      if (_selectedCategory != 'Toutes' &&
-          product.category != _selectedCategory) {
+      if (_selectedCategories.isNotEmpty &&
+          !_selectedCategories.contains(product.category)) {
         return false;
       }
 
@@ -378,17 +406,29 @@ class _ProductsPageState extends State<ProductsPage> {
     return Card(
       margin: const EdgeInsets.only(bottom: 16),
       elevation: 2,
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildProductImage(product.image),
-            const SizedBox(width: 16),
-            Expanded(child: _buildProductInfo(product)),
-            const SizedBox(width: 8),
-            _buildAddToCartButton(product),
-          ],
+      child: InkWell(
+        onTap: () {
+          final slug = slugify(product.title);
+
+          Navigator.pushNamed(
+            context,
+            '/product/$slug',
+            arguments: product,
+          );
+        },
+        borderRadius: BorderRadius.circular(8),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildProductImage(product.image),
+              const SizedBox(width: 16),
+              Expanded(child: _buildProductInfo(product)),
+              const SizedBox(width: 8),
+              _buildAddToCartButton(product),
+            ],
+          ),
         ),
       ),
     );

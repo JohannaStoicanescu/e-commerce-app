@@ -3,7 +3,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 import 'ui/pages/cart_page.dart';
-import 'ui/pages/catalog_page.dart';
 import 'ui/pages/checkout_page.dart';
 import 'ui/pages/home_page.dart';
 import 'ui/pages/login_page.dart';
@@ -14,6 +13,7 @@ import 'ui/pages/register_page.dart';
 import 'ui/viewmodels/products_viewmodel.dart';
 import 'ui/viewmodels/cart_viewmodel.dart';
 import 'data/services/auth_service.dart';
+import 'data/models/product.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -46,7 +46,6 @@ class MyApp extends StatelessWidget {
           initialRoute: '/',
           routes: {
             '/': (_) => const MyHomePage(),
-            '/catalog': (_) => const CatalogPage(),
             '/products': (_) => const ProductsPage(),
             '/cart': (_) => const CartPage(),
             '/checkout': (_) => const CheckoutPage(),
