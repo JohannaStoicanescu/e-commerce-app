@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
+import '../../data/services/auth_service.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
@@ -12,7 +14,8 @@ class AppDrawer extends StatelessWidget {
   }
 
   Future<void> _signOut(BuildContext context) async {
-    await FirebaseAuth.instance.signOut();
+    final authService = Provider.of<AuthService>(context, listen: false);
+    await authService.signOut();
 
     Navigator.pop(context);
 
@@ -23,14 +26,11 @@ class AppDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    User? user;
-    try {
-      user = FirebaseAuth.instance.currentUser;
-    } catch (e) {
-      user = null;
-    }
-
-    return Drawer(
+    return Consumer<AuthService>(
+      builder: (context, authService, child) {
+        final user = authService.currentUser;
+        
+        return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
@@ -65,6 +65,11 @@ class AppDrawer extends StatelessWidget {
             title: const Text('Accueil'),
             onTap: () => _goRouter(context, '/'),
           ),
+          ListTile(
+            leading: const Icon(Icons.list),
+            title: const Text('Catalogue'),
+            onTap: () => _goRouter(context, '/products'),
+          ),
           if (user == null) ...[
             const Divider(),
             ListTile(
@@ -78,11 +83,6 @@ class AppDrawer extends StatelessWidget {
               onTap: () => _goRouter(context, '/register'),
             ),
           ] else ...[
-            ListTile(
-              leading: const Icon(Icons.list),
-              title: const Text('Catalogue'),
-              onTap: () => _goRouter(context, '/catalog'),
-            ),
             ListTile(
               leading: const Icon(Icons.shopping_cart),
               title: const Text('Panier'),
@@ -100,8 +100,9 @@ class AppDrawer extends StatelessWidget {
               onTap: () => _signOut(context),
             ),
           ],
-        ],
-      ),
+        ),
+      );
+      },
     );
   }
 }
