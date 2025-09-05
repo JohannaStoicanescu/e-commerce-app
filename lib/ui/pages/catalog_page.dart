@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../helpers/slugify.dart';
 import '../widgets/drawer.dart';
+import '../widgets/cart_icon.dart';
 
 class Product {
   final String name;
@@ -34,7 +35,12 @@ class _CatalogPageState extends State<CatalogPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text('Catalogue')),
+        appBar: AppBar(
+          title: const Text('Catalogue'),
+          backgroundColor: Colors.blue[600],
+          foregroundColor: Colors.white,
+          actions: const [CartIcon()],
+        ),
         drawer: const AppDrawer(),
         body: Center(
           child: ListView.builder(

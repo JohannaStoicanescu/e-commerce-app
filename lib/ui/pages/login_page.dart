@@ -122,7 +122,7 @@ class _LoginPageState extends State<LoginPage> {
                 border: OutlineInputBorder(),
                 prefixIcon: Icon(Icons.lock),
               ),
-              obscureText: true, // Cache le texte
+              obscureText: true,
               enabled: !_isLoading,
               onSubmitted: (_) => _signIn(),
             ),

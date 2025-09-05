@@ -14,7 +14,8 @@ class _OrdersPageState extends State<OrdersPage> {
     return Scaffold(
       appBar: AppBar(title: const Text('Historique des commandes')),
       drawer: const AppDrawer(),
-      body: const Center(child: Text('TODO: Contenu de la page d\'historique des commandes')),
+      body: const Center(
+          child: Text('TODO: Contenu de la page d\'historique des commandes')),
     );
   }
 }
