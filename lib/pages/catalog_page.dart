@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import '../helpers/slugify.dart';
 import '../widgets/drawer.dart';
-import 'product_page.dart';
 
 class Product {
   final String name;
@@ -22,7 +22,6 @@ class CatalogPage extends StatefulWidget {
 }
 
 class _CatalogPageState extends State<CatalogPage> {
-
   final products = List.generate(
     20,
     (index) => Product(
@@ -35,26 +34,26 @@ class _CatalogPageState extends State<CatalogPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Catalogue')),
-      drawer: const AppDrawer(),
-      body: Center(
-        child: ListView.builder(
-          itemCount: products.length,
-          itemBuilder: (context, index) {
-            return ListTile(
-              title: Text(products[index].name),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute<void>(
-                    builder: (context) => ProductPage(product: products[index]),
-                  ),
-                );
-              },
-            );
-          },
-        ),
-      )
-    );
+        appBar: AppBar(title: const Text('Catalogue')),
+        drawer: const AppDrawer(),
+        body: Center(
+          child: ListView.builder(
+            itemCount: products.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                  title: Text(products[index].name),
+                  onTap: () {
+                    final product = products[index];
+                    final slug = slugify(product.name);
+
+                    Navigator.pushNamed(
+                      context,
+                      '/product/$slug',
+                      arguments: product,
+                    );
+                  });
+            },
+          ),
+        ));
   }
 }

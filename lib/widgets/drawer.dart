@@ -65,23 +65,8 @@ class AppDrawer extends StatelessWidget {
             title: const Text('Accueil'),
             onTap: () => _goRouter(context, '/'),
           ),
-          ListTile(
-            leading: const Icon(Icons.list),
-            title: const Text('Catalogue'),
-            onTap: () => _goRouter(context, '/catalog'),
-          ),
-          ListTile(
-            leading: const Icon(Icons.shopping_cart),
-            title: const Text('Panier'),
-            onTap: () => _goRouter(context, '/cart'),
-          ),
-          ListTile(
-            leading: const Icon(Icons.assignment),
-            title: const Text('Historique des commandes'),
-            onTap: () => _goRouter(context, '/orders'),
-          ),
-          const Divider(),
           if (user == null) ...[
+            const Divider(),
             ListTile(
               leading: const Icon(Icons.login, color: Colors.green),
               title: const Text('Se connecter'),
@@ -93,6 +78,22 @@ class AppDrawer extends StatelessWidget {
               onTap: () => _goRouter(context, '/register'),
             ),
           ] else ...[
+            ListTile(
+              leading: const Icon(Icons.list),
+              title: const Text('Catalogue'),
+              onTap: () => _goRouter(context, '/catalog'),
+            ),
+            ListTile(
+              leading: const Icon(Icons.shopping_cart),
+              title: const Text('Panier'),
+              onTap: () => _goRouter(context, '/cart'),
+            ),
+            ListTile(
+              leading: const Icon(Icons.assignment),
+              title: const Text('Historique des commandes'),
+              onTap: () => _goRouter(context, '/orders'),
+            ),
+            const Divider(),
             ListTile(
               leading: const Icon(Icons.logout, color: Colors.red),
               title: const Text('Se déconnecter'),
