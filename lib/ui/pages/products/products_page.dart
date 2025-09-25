@@ -720,19 +720,19 @@ class _ProductsPageState extends State<ProductsPage> {
                     color: const Color(0xFF667EEA).withOpacity(0.1),
                     borderRadius: BorderRadius.circular(16),
                   ),
-                  child: Row(
+                  child: const Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Icon(
                         Icons.lightbulb_outline_rounded,
-                        color: const Color(0xFF667EEA),
+                        color: Color(0xFF667EEA),
                         size: 14,
                       ),
-                      const SizedBox(width: 4),
+                      SizedBox(width: 4),
                       Text(
                         'Conseil: Utilisez des mots-clés plus généraux',
                         style: TextStyle(
-                          color: const Color(0xFF667EEA),
+                          color: Color(0xFF667EEA),
                           fontSize: 11,
                           fontWeight: FontWeight.w500,
                         ),
@@ -896,18 +896,18 @@ class _ProductsPageState extends State<ProductsPage> {
                         if (mounted) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                              content: Row(
+                              content: const Row(
                                 children: [
-                                  const Icon(
+                                  Icon(
                                     Icons.error_outline,
                                     color: Colors.white,
                                     size: 20,
                                   ),
-                                  const SizedBox(width: 8),
+                                  SizedBox(width: 8),
                                   Expanded(
                                     child: Text(
                                       'Erreur lors de l\'ajout au panier',
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontWeight: FontWeight.w500,
                                       ),
                                     ),
@@ -967,11 +967,13 @@ class _ProductsPageState extends State<ProductsPage> {
                 ),
               ),
               const SizedBox(width: 12),
-              const Text(
-                'Connexion requise',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF2C3E50),
+              const Expanded(
+                child: Text(
+                  'Connexion requise',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF2C3E50),
+                  ),
                 ),
               ),
             ],
@@ -1137,31 +1139,23 @@ class _ProductsPageState extends State<ProductsPage> {
         const SizedBox(height: 12),
         Row(
           children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-              decoration: BoxDecoration(
-                color: const Color(0xFF28A745),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Text(
-                product.formattedPrice,
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-            const SizedBox(width: 12),
             Expanded(
               child: Row(
                 children: [
+                  Text(
+                    product.formattedPrice,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                  ),
+                  const SizedBox(width: 10),
                   Icon(
                     Icons.star_rounded,
                     color: Colors.amber[600],
                     size: 16,
                   ),
-                  const SizedBox(width: 4),
                   Text(
                     product.rating.rate.toStringAsFixed(1),
                     style: TextStyle(
@@ -1170,16 +1164,8 @@ class _ProductsPageState extends State<ProductsPage> {
                       color: Colors.grey[700],
                     ),
                   ),
-                  const SizedBox(width: 4),
-                  Text(
-                    '(${product.rating.count})',
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.grey[500],
-                    ),
-                  ),
-                ],
-              ),
+                ]
+              ) 
             ),
           ],
         ),
