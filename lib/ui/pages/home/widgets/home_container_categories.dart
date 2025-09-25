@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-    
+
 class HomeContainerCategories extends StatelessWidget {
   const HomeContainerCategories({super.key});
 
   @override
-  Widget build(BuildContext context) {    
+  Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(24),
       color: const Color(0xFFF8F9FA),
@@ -63,14 +63,12 @@ class HomeContainerCategories extends StatelessWidget {
   }
 
   Container _buildCategoryCard(
-    BuildContext context, 
-    {
-      required String title,
-      required IconData icon,
-      required Color color,
-      required String category,
-    }
-  ) {
+    BuildContext context, {
+    required String title,
+    required IconData icon,
+    required Color color,
+    required String category,
+  }) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,

@@ -67,8 +67,7 @@ class HomeContainerIntro extends StatelessWidget {
                 ),
                 const SizedBox(height: 32),
                 ElevatedButton(
-                  onPressed: () =>
-                      Navigator.pushNamed(context, '/products'),
+                  onPressed: () => Navigator.pushNamed(context, '/products'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
                     foregroundColor: const Color(0xFF764BA2),
