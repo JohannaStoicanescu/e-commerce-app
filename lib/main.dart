@@ -12,7 +12,10 @@ import 'ui/pages/products/products_page.dart';
 import 'ui/pages/register/register_page.dart';
 import 'ui/viewmodels/products_viewmodel.dart';
 import 'ui/viewmodels/cart_viewmodel.dart';
+import 'ui/viewmodels/orders_viewmodel.dart';
+import 'ui/viewmodels/checkout_viewmodel.dart';
 import 'data/services/auth_service.dart';
+import 'data/services/payment_service.dart';
 import 'data/models/product.dart';
 
 void main() async {
@@ -21,6 +24,9 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  // Initialize Stripe
+  PaymentService.init();
 
   runApp(const MyApp());
 }
@@ -35,6 +41,8 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => AuthService()),
           ChangeNotifierProvider(create: (_) => ProductsViewModel()),
           ChangeNotifierProvider(create: (_) => CartViewModel()),
+          ChangeNotifierProvider(create: (_) => OrdersViewModel()),
+          ChangeNotifierProvider(create: (_) => CheckoutViewModel()),
         ],
         child: MaterialApp(
           title: 'E Commerce App',
