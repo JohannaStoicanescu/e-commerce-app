@@ -60,7 +60,7 @@ class _ProductPageState extends State<ProductPage> {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.1),
+            color: Colors.black.withOpacity(0.1),
             blurRadius: 15,
             offset: const Offset(0, 8),
           ),
@@ -80,8 +80,8 @@ class _ProductPageState extends State<ProductPage> {
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
-                    const Color(0xFF667EEA).withValues(alpha: 0.1),
-                    const Color(0xFF764BA2).withValues(alpha: 0.1),
+                    const Color(0xFF667EEA).withOpacity(0.1),
+                    const Color(0xFF764BA2).withOpacity(0.1),
                   ],
                 ),
                 borderRadius: BorderRadius.circular(16),
@@ -102,8 +102,8 @@ class _ProductPageState extends State<ProductPage> {
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
-                    const Color(0xFF667EEA).withValues(alpha: 0.1),
-                    const Color(0xFF764BA2).withValues(alpha: 0.1),
+                    const Color(0xFF667EEA).withOpacity(0.1),
+                    const Color(0xFF764BA2).withOpacity(0.1),
                   ],
                 ),
                 borderRadius: BorderRadius.circular(16),
@@ -130,7 +130,7 @@ class _ProductPageState extends State<ProductPage> {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.1),
+            color: Colors.black.withOpacity(0.1),
             blurRadius: 15,
             offset: const Offset(0, 8),
           ),
@@ -159,8 +159,8 @@ class _ProductPageState extends State<ProductPage> {
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
-                        const Color(0xFF667EEA).withValues(alpha: 0.1),
-                        const Color(0xFF764BA2).withValues(alpha: 0.1),
+                        const Color(0xFF667EEA).withOpacity(0.1),
+                        const Color(0xFF764BA2).withOpacity(0.1),
                       ],
                     ),
                     borderRadius: BorderRadius.circular(12),
@@ -180,7 +180,7 @@ class _ProductPageState extends State<ProductPage> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                   decoration: BoxDecoration(
-                    color: Colors.amber.withValues(alpha: 0.1),
+                    color: Colors.amber.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Row(
@@ -223,7 +223,7 @@ class _ProductPageState extends State<ProductPage> {
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: [
                   BoxShadow(
-                    color: const Color(0xFF28A745).withValues(alpha: 0.3),
+                    color: const Color(0xFF28A745).withOpacity(0.3),
                     blurRadius: 10,
                     offset: const Offset(0, 4),
                   ),
@@ -327,7 +327,7 @@ class _ProductPageState extends State<ProductPage> {
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withValues(alpha: 0.1),
+                color: Colors.black.withOpacity(0.1),
                 blurRadius: 15,
                 offset: const Offset(0, 8),
               ),
@@ -352,8 +352,7 @@ class _ProductPageState extends State<ProductPage> {
                     boxShadow: isLoggedIn
                         ? [
                             BoxShadow(
-                              color: const Color(0xFF667EEA)
-                                  .withValues(alpha: 0.3),
+                              color: const Color(0xFF667EEA).withOpacity(0.3),
                               blurRadius: 12,
                               offset: const Offset(0, 6),
                             ),
@@ -578,7 +577,7 @@ class _ProductPageState extends State<ProductPage> {
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: [
                   BoxShadow(
-                    color: const Color(0xFF667EEA).withValues(alpha: 0.3),
+                    color: const Color(0xFF667EEA).withOpacity(0.3),
                     blurRadius: 8,
                     offset: const Offset(0, 4),
                   ),

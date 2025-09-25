@@ -22,7 +22,7 @@ class NavigationLink extends StatelessWidget {
           Expanded(
             child: Container(
               height: 1,
-              color: Colors.white.withValues(alpha: 0.3),
+              color: Colors.white.withOpacity(0.3),
             ),
           ),
           Padding(
@@ -38,7 +38,7 @@ class NavigationLink extends StatelessWidget {
           Expanded(
             child: Container(
               height: 1,
-              color: Colors.white.withValues(alpha: 0.3),
+              color: Colors.white.withOpacity(0.3),
             ),
           ),
         ],
@@ -50,7 +50,7 @@ class NavigationLink extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
-        color: Colors.white.withValues(alpha: 0.8),
+        color: Colors.white.withOpacity(0.8),
         fontSize: 14,
       ),
     );

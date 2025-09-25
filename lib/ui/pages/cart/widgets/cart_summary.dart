@@ -19,7 +19,7 @@ class CartSummary extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: .1),
+            color: Colors.black.withOpacity(.1),
             blurRadius: 15,
             offset: const Offset(0, 5),
           ),
