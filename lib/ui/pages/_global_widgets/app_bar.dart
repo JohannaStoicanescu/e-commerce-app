@@ -52,7 +52,7 @@ class SiteAppBar extends StatelessWidget implements PreferredSizeWidget {
           return Container(
             margin: const EdgeInsets.only(right: 8, top: 8, bottom: 8),
             decoration: BoxDecoration(
-              color: Colors.white.withValues(alpha: 0.2),
+              color: Colors.white.withOpacity(0.2),
               borderRadius: BorderRadius.circular(12),
             ),
             child: action,
@@ -85,7 +85,7 @@ class SiteAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       boxShadow: [
         BoxShadow(
-          color: Colors.black.withValues(alpha: 0.1),
+          color: Colors.black.withOpacity(0.1),
           blurRadius: 8,
           offset: const Offset(0, 2),
         ),
@@ -95,7 +95,7 @@ class SiteAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   BoxDecoration _leadingBoxDecoration() {
     return BoxDecoration(
-      color: Colors.white.withValues(alpha: 0.2),
+      color: Colors.white.withOpacity(0.2),
       borderRadius: BorderRadius.circular(12),
     );
   }

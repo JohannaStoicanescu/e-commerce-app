@@ -39,10 +39,10 @@ class RegisterErrorMessage extends StatelessWidget {
 
   BoxDecoration _boxDecoration() {
     return BoxDecoration(
-      color: Colors.white.withValues(alpha: 0.9),
+      color: Colors.white.withOpacity(0.9),
       borderRadius: BorderRadius.circular(16),
       border: Border.all(
-        color: const Color(0xFFDC3545).withValues(alpha: 0.3),
+        color: const Color(0xFFDC3545).withOpacity(0.3),
         width: 1.5,
       ),
     );
@@ -50,7 +50,7 @@ class RegisterErrorMessage extends StatelessWidget {
 
   BoxDecoration _childrenBoxDecoration() {
     return BoxDecoration(
-      color: const Color(0xFFDC3545).withValues(alpha: 0.2),
+      color: const Color(0xFFDC3545).withOpacity(0.2),
       borderRadius: BorderRadius.circular(8),
     );
   }

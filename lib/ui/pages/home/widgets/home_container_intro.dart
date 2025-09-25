@@ -24,8 +24,8 @@ class HomeContainerIntro extends StatelessWidget {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Colors.black.withValues(alpha: 0.3),
-                    Colors.black.withValues(alpha: 0.1),
+                    Colors.black.withOpacity(0.3),
+                    Colors.black.withOpacity(0.1),
                   ],
                 ),
                 borderRadius: BorderRadius.circular(20),
@@ -67,8 +67,7 @@ class HomeContainerIntro extends StatelessWidget {
                 ),
                 const SizedBox(height: 32),
                 ElevatedButton(
-                  onPressed: () =>
-                      Navigator.pushNamed(context, '/products'),
+                  onPressed: () => Navigator.pushNamed(context, '/products'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
                     foregroundColor: const Color(0xFF764BA2),

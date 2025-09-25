@@ -1140,33 +1140,30 @@ class _ProductsPageState extends State<ProductsPage> {
         Row(
           children: [
             Expanded(
-              child: Row(
-                children: [
-                  Text(
-                    product.formattedPrice,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                  ),
-                  const SizedBox(width: 10),
-                  Icon(
-                    Icons.star_rounded,
-                    color: Colors.amber[600],
-                    size: 16,
-                  ),
-                  Text(
-                    product.rating.rate.toStringAsFixed(1),
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.grey[700],
-                    ),
-                  ),
-                ]
-              ) 
-            ),
+                child: Row(children: [
+              Text(
+                product.formattedPrice,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+              const SizedBox(width: 10),
+              Icon(
+                Icons.star_rounded,
+                color: Colors.amber[600],
+                size: 16,
+              ),
+              Text(
+                product.rating.rate.toStringAsFixed(1),
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.grey[700],
+                ),
+              ),
+            ])),
           ],
         ),
       ],

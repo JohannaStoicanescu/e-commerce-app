@@ -144,10 +144,10 @@ class _LoginPageState extends State<LoginPage> {
       leading: Container(
         margin: const EdgeInsets.all(8),
         decoration: BoxDecoration(
-          color: Colors.white.withValues(alpha: 0.3),
+          color: Colors.white.withOpacity(0.3),
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: Colors.white.withValues(alpha: 0.5),
+            color: Colors.white.withOpacity(0.5),
             width: 2,
           ),
         ),
@@ -175,7 +175,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _sizedBox(double height) {
+  SizedBox _sizedBox(double height) {
     return SizedBox(height: height);
   }
 }

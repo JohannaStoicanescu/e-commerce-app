@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-    
+
 class HomeContainerCategories extends StatelessWidget {
   const HomeContainerCategories({super.key});
 
   @override
-  Widget build(BuildContext context) {    
+  Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(24),
       color: const Color(0xFFF8F9FA),
@@ -63,21 +63,19 @@ class HomeContainerCategories extends StatelessWidget {
   }
 
   Container _buildCategoryCard(
-    BuildContext context, 
-    {
-      required String title,
-      required IconData icon,
-      required Color color,
-      required String category,
-    }
-  ) {
+    BuildContext context, {
+    required String title,
+    required IconData icon,
+    required Color color,
+    required String category,
+  }) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
+            color: Colors.black.withOpacity(0.05),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -101,7 +99,7 @@ class HomeContainerCategories extends StatelessWidget {
                   child: Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: color.withValues(alpha: 0.1),
+                      color: color.withOpacity(0.1),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Icon(
