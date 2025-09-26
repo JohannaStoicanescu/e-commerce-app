@@ -312,7 +312,10 @@ class _ProductsPageState extends State<ProductsPage> {
               decoration: BoxDecoration(
                 gradient: isSelected
                     ? const LinearGradient(
-                        colors: [Color.fromARGB(255, 147, 169, 255), Color.fromARGB(255, 75, 110, 248)],
+                        colors: [
+                          Color.fromARGB(255, 147, 169, 255),
+                          Color.fromARGB(255, 75, 110, 248)
+                        ],
                       )
                     : null,
                 color: isSelected ? null : Colors.grey[100],
@@ -679,7 +682,10 @@ class _ProductsPageState extends State<ProductsPage> {
                   padding: const EdgeInsets.all(20),
                   decoration: const BoxDecoration(
                     gradient: LinearGradient(
-                      colors: [Color.fromARGB(255, 147, 169, 255), Color.fromARGB(255, 75, 110, 248)],
+                      colors: [
+                        Color.fromARGB(255, 147, 169, 255),
+                        Color.fromARGB(255, 75, 110, 248)
+                      ],
                     ),
                     shape: BoxShape.circle,
                   ),
@@ -834,7 +840,10 @@ class _ProductsPageState extends State<ProductsPage> {
           decoration: BoxDecoration(
             gradient: isLoggedIn
                 ? const LinearGradient(
-                    colors: [Color.fromARGB(255, 147, 169, 255), Color.fromARGB(255, 75, 110, 248)],
+                    colors: [
+                      Color.fromARGB(255, 147, 169, 255),
+                      Color.fromARGB(255, 75, 110, 248)
+                    ],
                   )
                 : LinearGradient(
                     colors: [Colors.grey[400]!, Colors.grey[500]!],
@@ -950,7 +959,10 @@ class _ProductsPageState extends State<ProductsPage> {
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
                   gradient: const LinearGradient(
-                    colors: [Color.fromARGB(255, 147, 169, 255), Color.fromARGB(255, 75, 110, 248)],
+                    colors: [
+                      Color.fromARGB(255, 147, 169, 255),
+                      Color.fromARGB(255, 75, 110, 248)
+                    ],
                   ),
                   borderRadius: BorderRadius.circular(8),
                 ),
@@ -997,7 +1009,10 @@ class _ProductsPageState extends State<ProductsPage> {
             Container(
               decoration: BoxDecoration(
                 gradient: const LinearGradient(
-                  colors: [Color.fromARGB(255, 147, 169, 255), Color.fromARGB(255, 75, 110, 248)],
+                  colors: [
+                    Color.fromARGB(255, 147, 169, 255),
+                    Color.fromARGB(255, 75, 110, 248)
+                  ],
                 ),
                 borderRadius: BorderRadius.circular(8),
               ),

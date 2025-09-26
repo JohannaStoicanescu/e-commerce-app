@@ -21,14 +21,14 @@ class RegisterNavigationLink extends StatelessWidget {
         children: [
           Expanded(child: _container()),
           Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  _text(),
-                  _textButton(),
-                ],
-              ),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                _text(),
+                _textButton(),
+              ],
+            ),
           ),
           Expanded(child: _container()),
         ],

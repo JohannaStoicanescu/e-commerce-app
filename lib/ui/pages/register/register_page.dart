@@ -146,7 +146,7 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-AppBar _appBar() {
+  AppBar _appBar() {
     return AppBar(
       backgroundColor: Colors.transparent,
       elevation: 0,

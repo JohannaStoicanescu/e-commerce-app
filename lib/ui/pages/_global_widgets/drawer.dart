@@ -46,7 +46,10 @@ class AppDrawer extends StatelessWidget {
                     gradient: LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
-                      colors: [Color.fromARGB(255, 147, 169, 255), Color.fromARGB(255, 75, 110, 248)],
+                      colors: [
+                        Color.fromARGB(255, 147, 169, 255),
+                        Color.fromARGB(255, 75, 110, 248)
+                      ],
                     ),
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(30),

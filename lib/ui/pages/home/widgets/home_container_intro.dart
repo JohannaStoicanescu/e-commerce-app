@@ -11,12 +11,14 @@ class HomeContainerIntro extends StatelessWidget {
           child: Container(
             height: 300,
             decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Color.fromARGB(255, 147, 169, 255), Color.fromARGB(255, 75, 110, 248)],
-                ),
+              gradient: LinearGradient(
+                colors: [
+                  Color.fromARGB(255, 147, 169, 255),
+                  Color.fromARGB(255, 75, 110, 248)
+                ],
+              ),
             ),
-            child: 
-            Padding(
+            child: Padding(
               padding: const EdgeInsets.all(24),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -52,8 +54,7 @@ class HomeContainerIntro extends StatelessWidget {
                   ),
                   const SizedBox(height: 32),
                   ElevatedButton(
-                    onPressed: () =>
-                        Navigator.pushNamed(context, '/products'),
+                    onPressed: () => Navigator.pushNamed(context, '/products'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
                       foregroundColor: const Color(0xFF667EEA),

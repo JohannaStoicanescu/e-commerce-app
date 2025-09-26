@@ -13,7 +13,7 @@ class LoginHeader extends StatelessWidget {
           child: _icon(),
         ),
         const SizedBox(height: 30),
-        _text(),      
+        _text(),
       ],
     );
   }
