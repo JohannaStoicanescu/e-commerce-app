@@ -115,29 +115,31 @@ class _RegisterPageState extends State<RegisterPage> {
                 MediaQuery.of(context).padding.top -
                 MediaQuery.of(context).padding.bottom,
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const RegisterHeader(),
-              RegisterForm(
-                emailController: _emailController,
-                passwordController: _passwordController,
-                confirmPasswordController: _confirmPasswordController,
-                isLoading: _isLoading,
-                onRegister: _register,
-              ),
-              const SizedBox(height: 24),
-              RegisterErrorMessage(message: _errorMessage),
-              RegisterButton(
-                isLoading: _isLoading,
-                onPressed: _register,
-              ),
-              RegisterNavigationLink(
-                text: 'Déjà un compte ?',
-                linkText: 'Se connecter',
-                onPressed: () => Navigator.pushNamed(context, '/login'),
-              ),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const RegisterHeader(),
+                RegisterForm(
+                  emailController: _emailController,
+                  passwordController: _passwordController,
+                  confirmPasswordController: _confirmPasswordController,
+                  isLoading: _isLoading,
+                  onRegister: _register,
+                ),
+                const SizedBox(height: 24),
+                RegisterErrorMessage(message: _errorMessage),
+                RegisterButton(
+                  isLoading: _isLoading,
+                  onPressed: _register,
+                ),
+                RegisterNavigationLink(
+                  text: 'Déjà un compte ?',
+                  linkText: 'Se connecter',
+                  onPressed: () => Navigator.pushNamed(context, '/login'),
+                ),
+              ],
+            ),
           ),
         ),
       ),

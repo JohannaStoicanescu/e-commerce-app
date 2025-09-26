@@ -25,9 +25,10 @@ void main() {
         ),
       );
 
-      expect(find.byType(AppBar), findsOneWidget);
-      expect(find.byType(TextField), findsNWidgets(3));
-      expect(find.text('Déjà un compte ? Se connecter'), findsOneWidget);
+  expect(find.byType(AppBar), findsOneWidget);
+  expect(find.byType(TextField), findsNWidgets(3));
+  expect(find.text('Déjà un compte ?'), findsOneWidget);
+  expect(find.text('Se connecter'), findsOneWidget);
 
       await tester.binding.setSurfaceSize(null);
     });

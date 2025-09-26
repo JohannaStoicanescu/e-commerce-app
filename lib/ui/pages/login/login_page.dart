@@ -99,31 +99,33 @@ class _LoginPageState extends State<LoginPage> {
                 MediaQuery.of(context).padding.top -
                 MediaQuery.of(context).padding.bottom,
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const LoginHeader(),
-              const SizedBox(height: 40),
-              LoginForm(
-                emailController: _emailController,
-                passwordController: _passwordController,
-                isLoading: _isLoading,
-                onSignIn: _signIn,
-              ),
-              const SizedBox(height: 24),
-              if (_errorMessage.isNotEmpty)
-                ErrorMessage(message: _errorMessage),
-              const SizedBox(height: 24),
-              LoginButton(
-                isLoading: _isLoading,
-                onPressed: _signIn,
-              ),
-              NavigationLink(
-                text: 'Pas encore de compte ? ',
-                linkText: 'S\'inscrire',
-                onPressed: () => Navigator.pushNamed(context, '/register'),
-              ),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const LoginHeader(),
+                const SizedBox(height: 40),
+                LoginForm(
+                  emailController: _emailController,
+                  passwordController: _passwordController,
+                  isLoading: _isLoading,
+                  onSignIn: _signIn,
+                ),
+                const SizedBox(height: 24),
+                if (_errorMessage.isNotEmpty)
+                  ErrorMessage(message: _errorMessage),
+                const SizedBox(height: 24),
+                LoginButton(
+                  isLoading: _isLoading,
+                  onPressed: _signIn,
+                ),
+                NavigationLink(
+                  text: 'Pas encore de compte ? ',
+                  linkText: 'S\'inscrire',
+                  onPressed: () => Navigator.pushNamed(context, '/register'),
+                ),
+              ],
+            ),
           ),
         ),
       ),
