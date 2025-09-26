@@ -19,12 +19,7 @@ class NavigationLink extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Expanded(
-            child: Container(
-              height: 1,
-              color: Colors.white.withOpacity(0.3),
-            ),
-          ),
+          Expanded(child: _container()),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Row(
@@ -35,35 +30,37 @@ class NavigationLink extends StatelessWidget {
               ],
             ),
           ),
-          Expanded(
-            child: Container(
-              height: 1,
-              color: Colors.white.withOpacity(0.3),
-            ),
-          ),
+          Expanded(child: _container()),
         ],
       ),
     );
   }
 
-  Widget _text() {
+  Container _container() {
+    return Container(
+      height: 1,
+      color: Colors.black.withValues(alpha: 0.3),
+    );
+  }
+
+  Text _text() {
     return Text(
       text,
       style: TextStyle(
-        color: Colors.white.withOpacity(0.8),
+        color: Colors.black.withOpacity(0.8),
         fontSize: 14,
       ),
     );
   }
 
-  Widget _textButton() {
+  TextButton _textButton() {
     return TextButton(
       onPressed: onPressed,
       style: TextButton.styleFrom(
-        foregroundColor: Colors.white,
+        foregroundColor: Colors.black,
         padding: const EdgeInsets.symmetric(
-          horizontal: 4,
-          vertical: 4,
+          horizontal: 16,
+          vertical: 8,
         ),
       ),
       child: Text(
@@ -72,7 +69,7 @@ class NavigationLink extends StatelessWidget {
           fontSize: 14,
           fontWeight: FontWeight.w600,
           decoration: TextDecoration.underline,
-          decorationColor: Colors.white,
+          decorationColor: Colors.black,
         ),
       ),
     );

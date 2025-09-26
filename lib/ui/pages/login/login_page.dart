@@ -92,45 +92,38 @@ class _LoginPageState extends State<LoginPage> {
       appBar: _appBar(),
       body: Container(
         decoration: _boxDecoration(),
-        child: SafeArea(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: ConstrainedBox(
-              constraints: BoxConstraints(
-                minHeight: MediaQuery.of(context).size.height -
-                    MediaQuery.of(context).padding.top -
-                    MediaQuery.of(context).padding.bottom,
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          constraints: BoxConstraints(
+            minHeight: MediaQuery.of(context).size.height -
+                MediaQuery.of(context).padding.top -
+                MediaQuery.of(context).padding.bottom,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const LoginHeader(),
+              const SizedBox(height: 40),
+              LoginForm(
+                emailController: _emailController,
+                passwordController: _passwordController,
+                isLoading: _isLoading,
+                onSignIn: _signIn,
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _sizedBox(40),
-                  const LoginHeader(),
-                  _sizedBox(40),
-                  LoginForm(
-                    emailController: _emailController,
-                    passwordController: _passwordController,
-                    isLoading: _isLoading,
-                    onSignIn: _signIn,
-                  ),
-                  _sizedBox(24),
-                  if (_errorMessage.isNotEmpty)
-                    ErrorMessage(message: _errorMessage),
-                  _sizedBox(24),
-                  LoginButton(
-                    isLoading: _isLoading,
-                    onPressed: _signIn,
-                  ),
-                  _sizedBox(32),
-                  NavigationLink(
-                    text: 'Pas encore de compte ? ',
-                    linkText: 'S\'inscrire',
-                    onPressed: () => Navigator.pushNamed(context, '/register'),
-                  ),
-                  _sizedBox(40),
-                ],
+              const SizedBox(height: 24),
+              if (_errorMessage.isNotEmpty)
+                ErrorMessage(message: _errorMessage),
+              const SizedBox(height: 24),
+              LoginButton(
+                isLoading: _isLoading,
+                onPressed: _signIn,
               ),
-            ),
+              NavigationLink(
+                text: 'Pas encore de compte ? ',
+                linkText: 'S\'inscrire',
+                onPressed: () => Navigator.pushNamed(context, '/register'),
+              ),
+            ],
           ),
         ),
       ),
@@ -143,21 +136,13 @@ class _LoginPageState extends State<LoginPage> {
       elevation: 0,
       leading: Container(
         margin: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.3),
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color: Colors.white.withOpacity(0.5),
-            width: 2,
-          ),
-        ),
         child: IconButton(
           onPressed: () {
             Navigator.pushReplacementNamed(context, '/');
           },
           icon: const Icon(
             Icons.arrow_back_rounded,
-            color: Colors.white,
+            color: Color(0xFF667EEA),
             size: 24,
           ),
         ),
@@ -170,12 +155,11 @@ class _LoginPageState extends State<LoginPage> {
       gradient: LinearGradient(
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
-        colors: [Color(0xFF667EEA), Color(0xFF764BA2)],
+        colors: [
+          Color.fromARGB(255, 245, 249, 246),
+          Color.fromARGB(255, 183, 193, 238)
+        ]
       ),
     );
-  }
-
-  SizedBox _sizedBox(double height) {
-    return SizedBox(height: height);
   }
 }
