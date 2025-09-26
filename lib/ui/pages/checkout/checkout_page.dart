@@ -20,7 +20,6 @@ class _CheckoutPageState extends State<CheckoutPage> {
   final PageController _pageController = PageController();
   int _currentStep = 0;
 
-  // Form controllers for shipping
   final _fullNameController = TextEditingController();
   final _streetController = TextEditingController();
   final _cityController = TextEditingController();
@@ -28,7 +27,6 @@ class _CheckoutPageState extends State<CheckoutPage> {
   final _countryController = TextEditingController(text: 'France');
   final _phoneController = TextEditingController();
 
-  // Form controllers for billing
   final _cardNameController = TextEditingController();
   final _cardNumberController = TextEditingController();
   final _cardExpiryController = TextEditingController();
@@ -42,7 +40,6 @@ class _CheckoutPageState extends State<CheckoutPage> {
   @override
   void initState() {
     super.initState();
-    // Pre-fill with French test card data for convenience
     _cardNumberController.text = '4000 0000 0000 0002';
     _cardExpiryController.text = '12/28';
     _cardCvvController.text = '123';
@@ -1118,7 +1115,6 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
-                        // Go back to home (cart is already cleared)
                         Navigator.pushNamedAndRemoveUntil(
                             context, '/', (route) => false);
                       },
@@ -1256,7 +1252,6 @@ class _CheckoutPageState extends State<CheckoutPage> {
     final checkoutViewModel =
         Provider.of<CheckoutViewModel>(context, listen: false);
 
-    // Create shipping address
     final shippingAddress = ShippingAddress(
       fullName: _fullNameController.text,
       street: _streetController.text,
@@ -1266,7 +1261,6 @@ class _CheckoutPageState extends State<CheckoutPage> {
       phone: _phoneController.text.isNotEmpty ? _phoneController.text : null,
     );
 
-    // Create billing details
     final billingDetails = BillingDetails(
       name: _cardNameController.text,
       email: _emailController.text,
@@ -1275,7 +1269,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
           : null,
     );
 
-    _nextStep(); // Move to confirmation step
+    _nextStep();
 
     final success = await checkoutViewModel.processCheckout(
       cartItems: cartViewModel.cartItems,
@@ -1291,7 +1285,6 @@ class _CheckoutPageState extends State<CheckoutPage> {
   }
 }
 
-// Helper class for formatting card numbers
 class CardNumberInputFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(
@@ -1299,8 +1292,7 @@ class CardNumberInputFormatter extends TextInputFormatter {
     TextEditingValue newValue,
   ) {
     final text = newValue.text;
-    if (text.length > 23) return oldValue; // Max length with spaces
-
+    if (text.length > 23) return oldValue;
     final buffer = StringBuffer();
     for (int i = 0; i < text.length; i++) {
       if (text[i] != ' ') {
@@ -1319,7 +1311,6 @@ class CardNumberInputFormatter extends TextInputFormatter {
   }
 }
 
-// Helper class for formatting expiry dates
 class ExpiryDateInputFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(

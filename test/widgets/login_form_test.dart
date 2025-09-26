@@ -33,10 +33,8 @@ void main() {
         ),
       );
 
-      // Vérifier qu'on a 2 TextField (email + password)
       expect(find.byType(TextField), findsNWidgets(2));
 
-      // Vérifier les hints
       expect(find.text('Entrez votre email'), findsOneWidget);
       expect(find.text('Entrez votre mot de passe'), findsOneWidget);
     });
@@ -54,7 +52,6 @@ void main() {
         ),
       );
 
-      // Trouver et taper dans le champ email
       final emailField = find.byType(TextField).first;
       await tester.enterText(emailField, 'test@example.com');
       await tester.pump();
@@ -75,7 +72,6 @@ void main() {
         ),
       );
 
-      // Trouver et taper dans le champ password (dernier TextField)
       final passwordField = find.byType(TextField).last;
       await tester.enterText(passwordField, 'password123');
       await tester.pump();
@@ -96,11 +92,9 @@ void main() {
         ),
       );
 
-      // Le champ password devrait être obscurci
       final passwordFields = find.byType(TextField);
       expect(passwordFields, findsNWidgets(2));
 
-      // Vérifier que le password field a obscureText = true
       final passwordField = tester.widget<TextField>(passwordFields.last);
       expect(passwordField.obscureText, isTrue);
     });
@@ -112,7 +106,7 @@ void main() {
           child: LoginForm(
             emailController: emailController,
             passwordController: passwordController,
-            isLoading: true, // Mode loading
+            isLoading: true,
             onSignIn: () => signInCalled = true,
           ),
         ),
@@ -121,7 +115,6 @@ void main() {
       final textFields = find.byType(TextField);
       expect(textFields, findsNWidgets(2));
 
-      // Vérifier que les champs sont désactivés
       final emailField = tester.widget<TextField>(textFields.first);
       final passwordField = tester.widget<TextField>(textFields.last);
 
@@ -142,7 +135,6 @@ void main() {
         ),
       );
 
-      // Trouver le champ password et simuler l'appui sur Entrée
       final passwordField = find.byType(TextField).last;
       await tester.enterText(passwordField, 'test');
       await tester.testTextInput.receiveAction(TextInputAction.done);
@@ -167,12 +159,10 @@ void main() {
       final textFields = find.byType(TextField);
       expect(textFields, findsNWidgets(2));
 
-      // Vérifier les types de clavier
       final emailField = tester.widget<TextField>(textFields.first);
       final passwordField = tester.widget<TextField>(textFields.last);
 
       expect(emailField.keyboardType, equals(TextInputType.emailAddress));
-      // Le mot de passe utilise le type par défaut (text)
       expect(passwordField.keyboardType, equals(TextInputType.text));
     });
 

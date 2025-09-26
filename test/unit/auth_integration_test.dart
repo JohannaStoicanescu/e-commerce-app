@@ -42,7 +42,6 @@ void main() {
 
     testWidgets('Login validation shows error for empty fields',
         (WidgetTester tester) async {
-      // Set a larger surface size to prevent off-screen issues
       await tester.binding.setSurfaceSize(const Size(1200, 800));
 
       await tester.pumpWidget(
@@ -57,17 +56,13 @@ void main() {
       await tester.tap(loginButton, warnIfMissed: false);
       await tester.pump();
 
-      // Check for error message - it might be in a different format
-      expect(find.textContaining('champs'),
-          findsAtLeastNWidgets(0)); // More flexible check
+      expect(find.textContaining('champs'), findsAtLeastNWidgets(0));
 
-      // Reset surface size
       await tester.binding.setSurfaceSize(null);
     });
 
     testWidgets('Register validation shows error for empty fields',
         (WidgetTester tester) async {
-      // Set a larger surface size to prevent off-screen issues
       await tester.binding.setSurfaceSize(const Size(1200, 800));
 
       await tester.pumpWidget(
@@ -84,10 +79,8 @@ void main() {
         await tester.pump();
       }
 
-      // Check for error message - more flexible check
       expect(find.textContaining('champs'), findsAtLeastNWidgets(0));
 
-      // Reset surface size
       await tester.binding.setSurfaceSize(null);
     });
   });

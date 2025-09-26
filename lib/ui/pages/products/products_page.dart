@@ -31,10 +31,9 @@ class _ProductsPageState extends State<ProductsPage> {
   @override
   void initState() {
     super.initState();
-    // Set initial category filter if provided
     if (widget.initialCategory != null) {
       _selectedCategories.add(widget.initialCategory!);
-      _showFilters = true; // Show filters when coming from category selection
+      _showFilters = true;
     }
   }
 

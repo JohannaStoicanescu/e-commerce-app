@@ -185,17 +185,13 @@ Pour étendre les tests, vous pouvez ajouter :
 ### Logs de Debug
 
 ```dart
-// Afficher l'arbre des widgets
 debugDumpApp();
 
-// Afficher les widgets trouvés
 print(tester.allWidgets);
 
-// Vérifier les exceptions
 expect(tester.takeException(), isNull);
 ```
 
 ---
 
 ✨ **Cette suite de tests offre une couverture complète des fonctionnalités d'authentification de votre application e-commerce Flutter !**
-//
