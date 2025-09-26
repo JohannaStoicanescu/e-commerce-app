@@ -9,13 +9,9 @@ class PaymentService {
 
   static PaymentService get instance => _instance ??= PaymentService._();
 
-  // Test publishable key - replace with your actual test key in production
-  static const String _publishableKey =
-      'pk_test_51HvjKdLCnwSKD...'; // Add your test key here
+  static const String _publishableKey = 'pk_test_51HvjKdLCnwSKD...';
 
   static void init() {
-    // Stripe initialization - disabled for web compatibility
-    // On web, we'll use the mock implementation only
     if (!kIsWeb) {
       try {
         Stripe.publishableKey = _publishableKey;
@@ -34,7 +30,6 @@ class PaymentService {
     required String description,
   }) async {
     try {
-      // Mock implementation for demo purposes
       debugPrint('Mock payment intent creation for $amount $currency');
       await Future.delayed(const Duration(milliseconds: 300));
       return 'pi_mock_${DateTime.now().millisecondsSinceEpoch}_secret_${amount.toInt()}';
@@ -50,17 +45,11 @@ class PaymentService {
     String? cardNumber,
   }) async {
     try {
-      // For demo purposes, we'll simulate a successful payment
-      // In a real app, you would use Stripe.instance.confirmPayment
+      await Future.delayed(const Duration(seconds: 2));
 
-      await Future.delayed(
-          const Duration(seconds: 2)); // Simulate processing time
-
-      // Validate French test cards (always succeed for valid test numbers)
       if (cardNumber != null) {
         final cleanNumber = cardNumber.replaceAll(RegExp(r'\s'), '');
 
-        // French test card numbers that always succeed
         final validFrenchCards = [
           '4000000000000002', // Visa France
           '4000000760000002', // Visa France with 3D Secure
@@ -76,7 +65,6 @@ class PaymentService {
           );
         }
 
-        // Invalid card numbers
         final invalidCards = [
           '4000000000000127', // Generic decline
           '4000000000000069', // Expired card
@@ -91,7 +79,6 @@ class PaymentService {
         }
       }
 
-      // For any other card number, simulate 90% success rate
       final isSuccess = DateTime.now().millisecond % 10 != 0;
 
       if (isSuccess) {
@@ -122,13 +109,11 @@ class PaymentService {
     String? cardNumber,
   }) async {
     try {
-      // Create payment intent (mock)
       await Future.delayed(const Duration(milliseconds: 500));
 
       final clientSecret =
           'pi_mock_${DateTime.now().millisecondsSinceEpoch}_secret';
 
-      // Process payment (mock)
       final result = await processPayment(
         clientSecret: clientSecret,
         billingDetails: billingDetails,

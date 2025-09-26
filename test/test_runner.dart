@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 
-// Import de tous les groupes de tests
 import 'unit/firebase_setup_test.dart' as firebase_setup_tests;
 import 'unit/login_page_test.dart' as login_page_tests;
 import 'unit/auth_integration_test.dart' as auth_integration_tests;

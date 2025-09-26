@@ -11,23 +11,19 @@ class PlatformService {
 
   PlatformService._();
 
-  // Platform detection helpers
   bool get isWeb => kIsWeb;
   bool get isAndroid => !kIsWeb && Platform.isAndroid;
   bool get isIOS => !kIsWeb && Platform.isIOS;
   bool get isMobile => isAndroid || isIOS;
 
-  // PWA Installation for Web
   static const MethodChannel _webChannel = MethodChannel('web/platform');
 
   Future<bool> canInstallPWA() async {
     if (!isWeb) return false;
     try {
-      // Check if the app can be installed (beforeinstallprompt event)
       final bool? canInstall = await _webChannel.invokeMethod('canInstall');
       return canInstall ?? false;
     } catch (e) {
-      // Fallback: assume PWA can be installed on web
       return isWeb;
     }
   }
@@ -38,18 +34,15 @@ class PlatformService {
       await _webChannel.invokeMethod('install');
     } catch (e) {
       debugPrint('PWA installation not supported: $e');
-      // Fallback: show instructions
       _showInstallInstructions();
     }
   }
 
   void _showInstallInstructions() {
-    // This would show a dialog with manual installation instructions
     debugPrint(
         'PWA Manual Installation: Use browser menu to "Add to Home Screen"');
   }
 
-  // Share functionality (mainly for Android/iOS)
   Future<void> shareProduct({
     required String productName,
     required String productDescription,
@@ -70,7 +63,6 @@ Achetez maintenant sur notre app E-Commerce !
 
     try {
       if (imageUrl != null && imageUrl.isNotEmpty) {
-        // Share with image (requires network image download for mobile)
         await Share.share(
           shareText,
           subject: 'Produit: $productName',
@@ -113,7 +105,6 @@ Merci pour votre achat !
     }
   }
 
-  // Open external links
   Future<void> openUrl(String url) async {
     try {
       final Uri uri = Uri.parse(url);
@@ -130,7 +121,6 @@ Merci pour votre achat !
     }
   }
 
-  // Platform-specific UI helpers
   bool shouldUseCupertinoStyle() {
     return isIOS;
   }

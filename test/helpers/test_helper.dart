@@ -5,7 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_auth_mocks/firebase_auth_mocks.dart';
 import '../mocks/firebase_mocks.dart';
 
-// Clés de test réutilisables
 class TestKeys {
   static const Key emailField = Key('email_field');
   static const Key passwordField = Key('password_field');
@@ -16,9 +15,7 @@ class TestKeys {
   static const Key loadingIndicator = Key('loading_indicator');
 }
 
-// Helper pour créer un testable widget avec les providers nécessaires
 class TestHelper {
-  /// Crée un widget testable avec tous les providers nécessaires
   static Widget createTestableWidget({
     required Widget child,
     MockFirebaseAuth? mockAuth,
@@ -50,7 +47,6 @@ class TestHelper {
     );
   }
 
-  // Helper pour tester les champs de texte
   static Future<void> enterText(
     WidgetTester tester,
     String text,
@@ -60,7 +56,6 @@ class TestHelper {
     await tester.pump();
   }
 
-  // Helper pour taper sur un bouton
   static Future<void> tapButton(
     WidgetTester tester,
     Key key,
@@ -69,19 +64,15 @@ class TestHelper {
     await tester.pump();
   }
 
-  // Helper pour attendre qu'une animation se termine
   static Future<void> pumpAndSettle(WidgetTester tester) async {
     await tester.pumpAndSettle();
   }
 
-  // Helper pour vérifier qu'un texte d'erreur est affiché
   static void expectErrorMessage(String message) {
     expect(find.text(message), findsOneWidget);
   }
 
-  // Helper pour vérifier qu'aucune erreur n'est affichée
   static void expectNoErrorMessage() {
     expect(find.byType(Container), findsWidgets);
-    // Vérifie qu'aucun message d'erreur rouge n'est présent
   }
 }

@@ -92,7 +92,7 @@ class OrderService {
       );
 
       final orders = await getUserOrders();
-      orders.insert(0, order); // Add new order at the beginning
+      orders.insert(0, order);
       await saveOrders(orders);
 
       return order;

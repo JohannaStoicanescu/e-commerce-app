@@ -25,7 +25,6 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // Initialize Stripe
   PaymentService.init();
 
   runApp(const MyApp());

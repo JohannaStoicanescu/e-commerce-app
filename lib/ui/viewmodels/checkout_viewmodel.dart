@@ -37,7 +37,6 @@ class CheckoutViewModel extends ChangeNotifier {
       _setProcessing(true);
       _clearError();
 
-      // Simulate payment processing
       final paymentResult = await _paymentService.mockPaymentFlow(
         cartItems: cartItems,
         shippingAddress: shippingAddress,
@@ -46,17 +45,14 @@ class CheckoutViewModel extends ChangeNotifier {
       );
 
       if (paymentResult.status == PaymentStatus.succeeded) {
-        // Create order
         final order = await _orderService.createOrder(
           cartItems: cartItems,
           shippingAddress: shippingAddress,
           paymentIntentId: paymentResult.paymentIntentId,
         );
 
-        // Update order status to processing
         await _orderService.updateOrderStatus(order.id, OrderStatus.processing);
 
-        // Clear the cart after successful order
         if (onClearCart != null) {
           await onClearCart();
         }
