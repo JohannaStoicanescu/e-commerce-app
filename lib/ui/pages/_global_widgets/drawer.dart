@@ -46,7 +46,7 @@ class AppDrawer extends StatelessWidget {
                     gradient: LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
-                      colors: [Color(0xFF667EEA), Color(0xFF764BA2)],
+                      colors: [Color.fromARGB(255, 147, 169, 255), Color.fromARGB(255, 75, 110, 248)],
                     ),
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(30),
@@ -175,14 +175,14 @@ class AppDrawer extends StatelessWidget {
                     icon: Icons.login_rounded,
                     title: 'Se connecter',
                     route: '/login',
-                    iconColor: const Color(0xFF28A745),
+                    iconColor: const Color(0xFF007BFF),
                   ),
                   _menuItem(
                     context,
                     icon: Icons.person_add_rounded,
                     title: 'S\'inscrire',
                     route: '/register',
-                    iconColor: const Color(0xFF007BFF),
+                    iconColor: const Color(0xFF28A745),
                   ),
                 ] else ...[
                   _menuItem(

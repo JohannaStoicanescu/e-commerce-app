@@ -1,70 +1,74 @@
 import 'package:flutter/material.dart';
 
 class HomePaddingInfos extends StatelessWidget {
-  const HomePaddingInfos({super.key});
+    const HomePaddingInfos({super.key});
+    
+    @override
+    Widget build(BuildContext context) {
+        return Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            children: [
+              const SizedBox(height: 32),
+              const Text(
+                'Pourquoi choisir E-Commerce App ?',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF2C3E50),
+                ),
 
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(24),
-      child: Column(
-        children: [
-          const Text(
-            'Pourquoi choisir E-COMMERCE APP ?',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: Color(0xFF2C3E50),
-            ),
-          ),
-          const SizedBox(height: 32),
-          Row(
-            children: [
-              Expanded(
-                child: _buildFeatureCard(
-                  icon: Icons.local_shipping_rounded,
-                  title: 'Livraison Gratuite',
-                  subtitle: 'Dès 50€ d\'achat',
-                  color: const Color(0xFF28A745),
-                ),
+                textAlign: TextAlign.center,
               ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: _buildFeatureCard(
-                  icon: Icons.verified_rounded,
-                  title: 'Qualité Premium',
-                  subtitle: 'Matériaux sélectionnés',
-                  color: const Color(0xFF667EEA),
-                ),
+              const SizedBox(height: 32),
+              Row(
+                children: [
+                  Expanded(
+                    child: _buildFeatureCard(
+                      icon: Icons.local_shipping_rounded,
+                      title: 'Livraison Gratuite',
+                      subtitle: 'Dès 50€ d\'achat',
+                      color: const Color(0xFF28A745),
+                      
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: _buildFeatureCard(
+                      icon: Icons.verified_rounded,
+                      title: 'Qualité Premium',
+                      subtitle: 'Matériaux sélectionnés',
+                      color: const Color(0xFF667EEA),
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
-          const SizedBox(height: 16),
-          Row(
-            children: [
-              Expanded(
-                child: _buildFeatureCard(
-                  icon: Icons.support_agent_rounded,
-                  title: 'Service Client',
-                  subtitle: '7j/7 - 24h/24',
-                  color: const Color(0xFFFF6B35),
-                ),
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: _buildFeatureCard(
-                  icon: Icons.refresh_rounded,
-                  title: 'Retour Facile',
-                  subtitle: '30 jours pour changer d\'avis',
-                  color: const Color(0xFF6F42C1),
-                ),
+              const SizedBox(height: 16),
+              Row(
+                children: [
+                  Expanded(
+                    child: _buildFeatureCard(
+                      icon: Icons.support_agent_rounded,
+                      title: 'Service Client',
+                      subtitle: '7j/7 - 24h/24',
+                      color: const Color(0xFFFF6B35),
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: _buildFeatureCard(
+                      icon: Icons.refresh_rounded,
+                      title: 'Retour Facile',
+                      subtitle: '30 jours pour changer d\'avis',
+                      color: const Color(0xFF6F42C1),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
-        ],
-      ),
-    );
-  }
+        );
+    }
 
   Container _buildFeatureCard({
     required IconData icon,
@@ -74,6 +78,7 @@ class HomePaddingInfos extends StatelessWidget {
   }) {
     return Container(
       padding: const EdgeInsets.all(20),
+      height: 200,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
@@ -86,6 +91,7 @@ class HomePaddingInfos extends StatelessWidget {
         ],
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
             padding: const EdgeInsets.all(12),

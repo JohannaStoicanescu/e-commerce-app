@@ -19,41 +19,59 @@ class HomeContainerCategories extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 24),
-          GridView.count(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            crossAxisCount: 2,
-            crossAxisSpacing: 16,
-            mainAxisSpacing: 16,
-            childAspectRatio: 1.2,
+          // GridView.count(
+          //   shrinkWrap: true,
+          //   physics: const NeverScrollableScrollPhysics(),
+          //   crossAxisCount: 2,
+          //   crossAxisSpacing: 16,
+          //   mainAxisSpacing: 16,
+          //   childAspectRatio: 1.2,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _buildCategoryCard(
-                context,
-                title: 'Vêtements Femme',
-                icon: Icons.checkroom_rounded,
-                color: const Color(0xFFE91E63),
-                category: 'women\'s clothing',
+              Expanded(
+                child: _buildCategoryCard(
+                  context,
+                  title: 'Vêtements Femme',
+                  icon: Icons.checkroom_rounded,
+                  color: const Color(0xFFE91E63),
+                  category: 'women\'s clothing',
+                ),
               ),
-              _buildCategoryCard(
-                context,
-                title: 'Vêtements Homme',
-                icon: Icons.man_rounded,
-                color: const Color(0xFF2196F3),
-                category: 'men\'s clothing',
+              const SizedBox(width: 16),
+              Expanded(
+                child: _buildCategoryCard(
+                  context,
+                  title: 'Vêtements Homme',
+                  icon: Icons.man_rounded,
+                  color: const Color(0xFF2196F3),
+                  category: 'men\'s clothing',
+                ),
               ),
-              _buildCategoryCard(
-                context,
-                title: 'Bijoux',
-                icon: Icons.diamond_rounded,
-                color: const Color(0xFFFF9800),
-                category: 'jewelery',
+            ],
+          ),
+          const SizedBox(height: 16),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                child: _buildCategoryCard(
+                  context,
+                  title: 'Bijoux',
+                  icon: Icons.diamond_rounded,
+                  color: const Color(0xFFFF9800),
+                  category: 'jewelery',
+                ),
               ),
-              _buildCategoryCard(
-                context,
-                title: 'Électronique',
-                icon: Icons.devices_rounded,
-                color: const Color(0xFF4CAF50),
-                category: 'electronics',
+              const SizedBox(width: 16),
+              Expanded(
+                child: _buildCategoryCard(
+                  context,
+                  title: 'Électronique',
+                  icon: Icons.devices_rounded,
+                  color: const Color(0xFF4CAF50),
+                  category: 'electronics',
+                ),
               ),
             ],
           ),
@@ -70,6 +88,8 @@ class HomeContainerCategories extends StatelessWidget {
     required String category,
   }) {
     return Container(
+      padding: const EdgeInsets.all(20),
+      height: 200,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
@@ -93,7 +113,6 @@ class HomeContainerCategories extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
               children: [
                 Flexible(
                   child: Container(

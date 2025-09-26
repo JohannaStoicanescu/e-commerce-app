@@ -105,46 +105,59 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: const GoBackButton(),
-      ),
+      appBar: _appBar(),
       body: Container(
         decoration: _boxDecoration(),
-        child: SafeArea(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: ConstrainedBox(
-              constraints: BoxConstraints(
-                minHeight: MediaQuery.of(context).size.height -
-                    MediaQuery.of(context).padding.top -
-                    MediaQuery.of(context).padding.bottom,
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          constraints: BoxConstraints(
+            minHeight: MediaQuery.of(context).size.height -
+                MediaQuery.of(context).padding.top -
+                MediaQuery.of(context).padding.bottom,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const RegisterHeader(),
+              RegisterForm(
+                emailController: _emailController,
+                passwordController: _passwordController,
+                confirmPasswordController: _confirmPasswordController,
+                isLoading: _isLoading,
+                onRegister: _register,
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const RegisterHeader(),
-                  RegisterForm(
-                    emailController: _emailController,
-                    passwordController: _passwordController,
-                    confirmPasswordController: _confirmPasswordController,
-                    isLoading: _isLoading,
-                    onRegister: _register,
-                  ),
-                  const SizedBox(height: 24),
-                  RegisterErrorMessage(message: _errorMessage),
-                  RegisterButton(
-                    isLoading: _isLoading,
-                    onPressed: _register,
-                  ),
-                  const SizedBox(height: 10),
-                  RegisterNavigationLink(
-                    isLoading: _isLoading,
-                  ),
-                ],
+              const SizedBox(height: 24),
+              RegisterErrorMessage(message: _errorMessage),
+              RegisterButton(
+                isLoading: _isLoading,
+                onPressed: _register,
               ),
-            ),
+              RegisterNavigationLink(
+                text: 'Déjà un compte ?',
+                linkText: 'Se connecter',
+                onPressed: () => Navigator.pushNamed(context, '/login'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+AppBar _appBar() {
+    return AppBar(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      leading: Container(
+        margin: const EdgeInsets.all(8),
+        child: IconButton(
+          onPressed: () {
+            Navigator.pushReplacementNamed(context, '/');
+          },
+          icon: const Icon(
+            Icons.arrow_back_rounded,
+            color: Color(0xFF28A745),
+            size: 24,
           ),
         ),
       ),

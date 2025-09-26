@@ -14,7 +14,7 @@ class RegisterHeader extends StatelessWidget {
         ),
         const SizedBox(height: 15),
         _text(),
-        const SizedBox(height: 40),
+        const SizedBox(height: 10),
       ],
     );
   }
@@ -23,7 +23,7 @@ class RegisterHeader extends StatelessWidget {
     return BoxDecoration(
       color: Colors.white,
       border: Border.all(
-        color: Color(0xFF28A745),
+        color: const Color(0xFF28A745),
         width: 2,
       ),
       borderRadius: BorderRadius.circular(16),
