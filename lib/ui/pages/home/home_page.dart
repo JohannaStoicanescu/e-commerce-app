@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../_global_widgets/drawer.dart';
 import '../_global_widgets/cart_icon.dart';
 import '../_global_widgets/app_bar.dart';
+import '../_global_widgets/pwa_install_widget.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -29,11 +30,13 @@ class _MyHomePageState extends State<MyHomePage> {
       body: const SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 32),
+            SizedBox(height: 16),
             HomeContainerIntro(),
             HomePaddingInfos(),
             HomeContainerCategories(),
             HomeContainerNewsletter(),
+            SizedBox(height: 24),
+            PWAInstallWidget(),
             SizedBox(height: 32),
           ],
         ),
