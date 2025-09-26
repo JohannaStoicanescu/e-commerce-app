@@ -78,11 +78,7 @@ class SiteAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   BoxDecoration _boxDecoration() {
     return BoxDecoration(
-      gradient: const LinearGradient(
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-        colors: [Color(0xFF667EEA), Color(0xFF764BA2)],
-      ),
+      color: const Color.fromARGB(255, 75, 110, 248),
       boxShadow: [
         BoxShadow(
           color: Colors.black.withOpacity(0.1),

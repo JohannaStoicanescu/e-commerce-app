@@ -312,7 +312,10 @@ class _ProductsPageState extends State<ProductsPage> {
               decoration: BoxDecoration(
                 gradient: isSelected
                     ? const LinearGradient(
-                        colors: [Color(0xFF667EEA), Color(0xFF764BA2)],
+                        colors: [
+                          Color.fromARGB(255, 147, 169, 255),
+                          Color.fromARGB(255, 75, 110, 248)
+                        ],
                       )
                     : null,
                 color: isSelected ? null : Colors.grey[100],
@@ -359,15 +362,15 @@ class _ProductsPageState extends State<ProductsPage> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: BoxDecoration(
-              color: const Color(0xFF28A745).withOpacity(0.1),
+              color: Colors.amber.withOpacity(0.1),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Text(
               '${_selectedCategories.length} catégorie(s) sélectionnée(s)',
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 12,
-                color: Color(0xFF28A745),
-                fontWeight: FontWeight.w500,
+                color: Colors.amber[700],
+                fontWeight: FontWeight.w600,
               ),
             ),
           ),
@@ -419,13 +422,13 @@ class _ProductsPageState extends State<ProductsPage> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF28A745).withOpacity(0.1),
+                  color: const Color(0xFF667EEA).withOpacity(0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
                   '${_minPrice.round()}€',
                   style: const TextStyle(
-                    color: Color(0xFF28A745),
+                    color: Color(0xFF667EEA),
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -434,13 +437,13 @@ class _ProductsPageState extends State<ProductsPage> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF28A745).withOpacity(0.1),
+                  color: const Color(0xFF667EEA).withOpacity(0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
                   '${_maxPrice.round()}€',
                   style: const TextStyle(
-                    color: Color(0xFF28A745),
+                    color: Color(0xFF667EEA),
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -474,7 +477,7 @@ class _ProductsPageState extends State<ProductsPage> {
             divisions: 10,
             activeColor: const Color(0xFF667EEA),
             inactiveColor: const Color(0xFF667EEA).withOpacity(0.2),
-            thumbColor: const Color(0xFF764BA2),
+            thumbColor: const Color(0xFF667EEA),
             label: '${_minRating.toStringAsFixed(1)} ⭐',
             onChanged: (value) {
               setState(() {
@@ -540,8 +543,8 @@ class _ProductsPageState extends State<ProductsPage> {
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
-                    const Color(0xFF667EEA).withOpacity(0.1),
-                    const Color(0xFF764BA2).withOpacity(0.1),
+                    const Color.fromARGB(255, 147, 169, 255).withOpacity(0.1),
+                    const Color.fromARGB(255, 75, 110, 248).withOpacity(0.1),
                   ],
                 ),
                 shape: BoxShape.circle,
@@ -677,11 +680,11 @@ class _ProductsPageState extends State<ProductsPage> {
               children: [
                 Container(
                   padding: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
-                        const Color(0xFF667EEA).withOpacity(0.1),
-                        const Color(0xFF764BA2).withOpacity(0.1),
+                        Color.fromARGB(255, 147, 169, 255),
+                        Color.fromARGB(255, 75, 110, 248)
                       ],
                     ),
                     shape: BoxShape.circle,
@@ -837,7 +840,10 @@ class _ProductsPageState extends State<ProductsPage> {
           decoration: BoxDecoration(
             gradient: isLoggedIn
                 ? const LinearGradient(
-                    colors: [Color(0xFF667EEA), Color(0xFF764BA2)],
+                    colors: [
+                      Color.fromARGB(255, 147, 169, 255),
+                      Color.fromARGB(255, 75, 110, 248)
+                    ],
                   )
                 : LinearGradient(
                     colors: [Colors.grey[400]!, Colors.grey[500]!],
@@ -927,10 +933,8 @@ class _ProductsPageState extends State<ProductsPage> {
                   : () {
                       _showLoginDialog(context);
                     },
-              child: Icon(
-                isLoggedIn
-                    ? Icons.add_shopping_cart_rounded
-                    : Icons.login_rounded,
+              child: const Icon(
+                Icons.add_shopping_cart_rounded,
                 color: Colors.white,
                 size: 20,
               ),
@@ -955,7 +959,10 @@ class _ProductsPageState extends State<ProductsPage> {
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
                   gradient: const LinearGradient(
-                    colors: [Color(0xFF667EEA), Color(0xFF764BA2)],
+                    colors: [
+                      Color.fromARGB(255, 147, 169, 255),
+                      Color.fromARGB(255, 75, 110, 248)
+                    ],
                   ),
                   borderRadius: BorderRadius.circular(8),
                 ),
@@ -1002,7 +1009,10 @@ class _ProductsPageState extends State<ProductsPage> {
             Container(
               decoration: BoxDecoration(
                 gradient: const LinearGradient(
-                  colors: [Color(0xFF667EEA), Color(0xFF764BA2)],
+                  colors: [
+                    Color.fromARGB(255, 147, 169, 255),
+                    Color.fromARGB(255, 75, 110, 248)
+                  ],
                 ),
                 borderRadius: BorderRadius.circular(8),
               ),

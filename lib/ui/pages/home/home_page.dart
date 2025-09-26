@@ -30,7 +30,6 @@ class _MyHomePageState extends State<MyHomePage> {
       body: const SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 16),
             HomeContainerIntro(),
             HomePaddingInfos(),
             HomeContainerCategories(),

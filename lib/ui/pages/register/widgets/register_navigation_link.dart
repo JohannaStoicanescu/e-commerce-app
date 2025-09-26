@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 
 class RegisterNavigationLink extends StatelessWidget {
-  final bool isLoading;
+  final String text;
+  final String linkText;
+  final VoidCallback onPressed;
 
   const RegisterNavigationLink({
     super.key,
-    required this.isLoading,
+    required this.text,
+    required this.linkText,
+    required this.onPressed,
   });
 
   @override
@@ -17,8 +21,15 @@ class RegisterNavigationLink extends StatelessWidget {
         children: [
           Expanded(child: _container()),
           Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: _button(context)),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                _text(),
+                _textButton(),
+              ],
+            ),
+          ),
           Expanded(child: _container()),
         ],
       ),
@@ -28,36 +39,39 @@ class RegisterNavigationLink extends StatelessWidget {
   Widget _container() {
     return Container(
       height: 1,
-      color: Colors.white.withOpacity(0.3),
+      color: Colors.black.withOpacity(0.3),
     );
   }
 
-  Widget _text() {
-    return const Text(
-      'Déjà un compte ? Se connecter',
+  Text _text() {
+    return Text(
+      text,
       style: TextStyle(
+        color: Colors.black.withOpacity(0.8),
         fontSize: 14,
-        color: Colors.black54,
-        fontWeight: FontWeight.w600,
-        decoration: TextDecoration.underline,
-        decorationColor: Colors.black54,
       ),
-      overflow: TextOverflow.ellipsis,
     );
   }
 
-  Widget _button(BuildContext context) {
+  TextButton _textButton() {
     return TextButton(
-        onPressed: !isLoading
-            ? () => Navigator.pushReplacementNamed(context, '/login')
-            : null,
-        style: TextButton.styleFrom(
-          foregroundColor: Colors.white,
-          padding: const EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 8,
-          ),
+      onPressed: onPressed,
+      style: TextButton.styleFrom(
+        foregroundColor: Colors.black,
+        padding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 8,
         ),
-        child: _text());
+      ),
+      child: Text(
+        linkText,
+        style: const TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.w600,
+          decoration: TextDecoration.underline,
+          decorationColor: Colors.black,
+        ),
+      ),
+    );
   }
 }

@@ -9,13 +9,15 @@ class HomePaddingInfos extends StatelessWidget {
       padding: const EdgeInsets.all(24),
       child: Column(
         children: [
+          const SizedBox(height: 32),
           const Text(
-            'Pourquoi choisir E-COMMERCE APP ?',
+            'Pourquoi choisir E-Commerce App ?',
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
               color: Color(0xFF2C3E50),
             ),
+            textAlign: TextAlign.center,
           ),
           const SizedBox(height: 32),
           Row(
@@ -74,6 +76,7 @@ class HomePaddingInfos extends StatelessWidget {
   }) {
     return Container(
       padding: const EdgeInsets.all(20),
+      height: 200,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
@@ -86,6 +89,7 @@ class HomePaddingInfos extends StatelessWidget {
         ],
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
             padding: const EdgeInsets.all(12),

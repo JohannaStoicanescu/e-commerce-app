@@ -17,7 +17,7 @@ class LoginButton extends StatelessWidget {
       height: 56,
       decoration: BoxDecoration(
         gradient: const LinearGradient(
-          colors: [Color(0xFF667EEA), Color(0xFF764BA2)],
+          colors: [Color.fromARGB(255, 62, 88, 205), Color(0xFF667EEA)],
         ),
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
@@ -51,12 +51,13 @@ class LoginButton extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(
+                    color: Colors.white,
                     Icons.login_rounded,
                     size: 24,
                   ),
                   SizedBox(width: 12),
                   Text(
-                    'SE CONNECTER',
+                    'Se connecter',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,

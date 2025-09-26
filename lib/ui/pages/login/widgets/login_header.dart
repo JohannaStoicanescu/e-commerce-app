@@ -10,49 +10,48 @@ class LoginHeader extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(24),
           decoration: _boxDecoration(),
-          child: const Icon(
-            Icons.login_rounded,
-            size: 64,
-            color: Colors.white,
-          ),
+          child: _icon(),
         ),
-        const SizedBox(height: 32),
-        const Text(
-          'Bienvenue',
-          style: TextStyle(
-            fontSize: 32,
-            fontWeight: FontWeight.bold,
-            color: Color(0xFF2C3E50),
-          ),
-        ),
-        const SizedBox(height: 8),
-        const Text(
-          'Connectez-vous à votre compte',
-          style: TextStyle(
-            fontSize: 16,
-            color: Color(0xFF6C757D),
-            height: 1.5,
-          ),
-          textAlign: TextAlign.center,
-        ),
-        const SizedBox(height: 40),
+        const SizedBox(height: 30),
+        _text(),
       ],
     );
   }
 
   BoxDecoration _boxDecoration() {
     return BoxDecoration(
-      gradient: const LinearGradient(
-        colors: [Color(0xFF667EEA), Color(0xFF764BA2)],
+      color: Colors.white,
+      border: Border.all(
+        color: const Color(0xFF667EEA),
+        width: 2,
       ),
-      borderRadius: BorderRadius.circular(50),
+      borderRadius: BorderRadius.circular(16),
       boxShadow: [
         BoxShadow(
-          color: const Color(0xFF667EEA).withOpacity(0.3),
-          blurRadius: 20,
-          offset: const Offset(0, 10),
+          color: Colors.black.withOpacity(0.7),
+          blurRadius: 10,
+          offset: const Offset(0, 5),
         ),
       ],
+    );
+  }
+
+  Icon _icon() {
+    return const Icon(
+      Icons.login_rounded,
+      size: 50,
+      color: Color(0xFF667EEA),
+    );
+  }
+
+  Text _text() {
+    return const Text(
+      'Se connecter',
+      style: TextStyle(
+        fontSize: 32,
+        fontWeight: FontWeight.bold,
+        color: Color(0xFF2C3E50),
+      ),
     );
   }
 }

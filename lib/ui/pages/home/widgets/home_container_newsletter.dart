@@ -10,7 +10,10 @@ class HomeContainerNewsletter extends StatelessWidget {
       padding: const EdgeInsets.all(32),
       decoration: BoxDecoration(
         gradient: const LinearGradient(
-          colors: [Color(0xFF667EEA), Color(0xFF764BA2)],
+          colors: [
+            Color.fromARGB(255, 147, 169, 255),
+            Color.fromARGB(255, 75, 110, 248)
+          ],
         ),
         borderRadius: BorderRadius.circular(20),
       ),
@@ -35,9 +38,7 @@ class HomeContainerNewsletter extends StatelessWidget {
             'Inscrivez-vous à notre newsletter pour recevoir nos dernières nouveautés et offres exclusives',
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: Colors.white70,
-              fontSize: 16,
-            ),
+                color: Colors.white, fontSize: 16, fontStyle: FontStyle.italic),
           ),
           const SizedBox(height: 24),
           ElevatedButton(
@@ -50,14 +51,14 @@ class HomeContainerNewsletter extends StatelessWidget {
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.white,
-              foregroundColor: const Color(0xFF764BA2),
+              foregroundColor: const Color(0xFF667EEA),
               padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30),
               ),
             ),
             child: const Text(
-              'S\'INSCRIRE',
+              'S\'inscrire',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 letterSpacing: 1,
