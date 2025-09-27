@@ -74,13 +74,13 @@ class _CheckoutPageState extends State<CheckoutPage> {
       drawer: const AppDrawer(),
       body: Consumer2<CartViewModel, AuthService>(
         builder: (context, cartViewModel, authService, child) {
-          if (!authService.isLoggedIn) {
-            return _buildNotLoggedIn();
-          }
+          // if (!authService.isLoggedIn) {
+          //   return _buildNotLoggedIn();
+          // }
 
-          if (cartViewModel.cartItems.isEmpty) {
-            return _buildEmptyCart();
-          }
+          // if (cartViewModel.cartItems.isEmpty) {
+          //   return _buildEmptyCart();
+          // }
 
           return _buildCheckoutFlow(cartViewModel);
         },
@@ -88,183 +88,183 @@ class _CheckoutPageState extends State<CheckoutPage> {
     );
   }
 
-  Widget _buildNotLoggedIn() {
-    return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [Color(0xFFF8F9FA), Color(0xFFE9ECEF)],
-        ),
-      ),
-      child: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(32),
-          child: Container(
-            padding: const EdgeInsets.all(32),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
-                  blurRadius: 20,
-                  offset: const Offset(0, 10),
-                ),
-              ],
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                      colors: [Color(0xFF667EEA), Color(0xFF764BA2)],
-                    ),
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  child: const Icon(
-                    Icons.login_rounded,
-                    size: 48,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(height: 24),
-                const Text(
-                  'Connexion requise',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF2C3E50),
-                  ),
-                ),
-                const SizedBox(height: 12),
-                const Text(
-                  'Vous devez être connecté pour finaliser votre commande',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Color(0xFF6C757D),
-                    height: 1.5,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 32),
-                ElevatedButton(
-                  onPressed: () => Navigator.pushNamed(context, '/login'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF667EEA),
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 32, vertical: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    elevation: 8,
-                  ),
-                  child: const Text(
-                    'SE CONNECTER',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 1,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+  // Widget _buildNotLoggedIn() {
+  //   return Container(
+  //     decoration: const BoxDecoration(
+  //       gradient: LinearGradient(
+  //         begin: Alignment.topLeft,
+  //         end: Alignment.bottomRight,
+  //         colors: [Color(0xFFF8F9FA), Color(0xFFE9ECEF)],
+  //       ),
+  //     ),
+  //     child: Center(
+  //       child: Padding(
+  //         padding: const EdgeInsets.all(32),
+  //         child: Container(
+  //           padding: const EdgeInsets.all(32),
+  //           decoration: BoxDecoration(
+  //             color: Colors.white,
+  //             borderRadius: BorderRadius.circular(20),
+  //             boxShadow: [
+  //               BoxShadow(
+  //                 color: Colors.black.withOpacity(0.1),
+  //                 blurRadius: 20,
+  //                 offset: const Offset(0, 10),
+  //               ),
+  //             ],
+  //           ),
+  //           child: Column(
+  //             mainAxisSize: MainAxisSize.min,
+  //             children: [
+  //               Container(
+  //                 padding: const EdgeInsets.all(20),
+  //                 decoration: BoxDecoration(
+  //                   gradient: const LinearGradient(
+  //                     colors: [Color(0xFF667EEA), Color(0xFF764BA2)],
+  //                   ),
+  //                   borderRadius: BorderRadius.circular(50),
+  //                 ),
+  //                 child: const Icon(
+  //                   Icons.login_rounded,
+  //                   size: 48,
+  //                   color: Colors.white,
+  //                 ),
+  //               ),
+  //               const SizedBox(height: 24),
+  //               const Text(
+  //                 'Connexion requise',
+  //                 style: TextStyle(
+  //                   fontSize: 24,
+  //                   fontWeight: FontWeight.bold,
+  //                   color: Color(0xFF2C3E50),
+  //                 ),
+  //               ),
+  //               const SizedBox(height: 12),
+  //               const Text(
+  //                 'Vous devez être connecté pour finaliser votre commande',
+  //                 style: TextStyle(
+  //                   fontSize: 16,
+  //                   color: Color(0xFF6C757D),
+  //                   height: 1.5,
+  //                 ),
+  //                 textAlign: TextAlign.center,
+  //               ),
+  //               const SizedBox(height: 32),
+  //               ElevatedButton(
+  //                 onPressed: () => Navigator.pushNamed(context, '/login'),
+  //                 style: ElevatedButton.styleFrom(
+  //                   backgroundColor: const Color(0xFF667EEA),
+  //                   foregroundColor: Colors.white,
+  //                   padding: const EdgeInsets.symmetric(
+  //                       horizontal: 32, vertical: 16),
+  //                   shape: RoundedRectangleBorder(
+  //                     borderRadius: BorderRadius.circular(30),
+  //                   ),
+  //                   elevation: 8,
+  //                 ),
+  //                 child: const Text(
+  //                   'SE CONNECTER',
+  //                   style: TextStyle(
+  //                     fontWeight: FontWeight.bold,
+  //                     letterSpacing: 1,
+  //                   ),
+  //                 ),
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 
-  Widget _buildEmptyCart() {
-    return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [Color(0xFFF8F9FA), Color(0xFFE9ECEF)],
-        ),
-      ),
-      child: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(32),
-          child: Container(
-            padding: const EdgeInsets.all(40),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
-                  blurRadius: 20,
-                  offset: const Offset(0, 10),
-                ),
-              ],
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(24),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFFF6B35).withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  child: const Icon(
-                    Icons.shopping_cart_outlined,
-                    size: 64,
-                    color: Color(0xFFFF6B35),
-                  ),
-                ),
-                const SizedBox(height: 24),
-                const Text(
-                  'Panier vide',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF2C3E50),
-                  ),
-                ),
-                const SizedBox(height: 12),
-                const Text(
-                  'Ajoutez des produits à votre panier pour procéder au paiement',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Color(0xFF6C757D),
-                    height: 1.5,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 32),
-                ElevatedButton(
-                  onPressed: () => Navigator.pushNamed(context, '/products'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF667EEA),
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 32, vertical: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    elevation: 8,
-                  ),
-                  child: const Text(
-                    'DÉCOUVRIR NOS PRODUITS',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 1,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+  // Widget _buildEmptyCart() {
+  //   return Container(
+  //     decoration: const BoxDecoration(
+  //       gradient: LinearGradient(
+  //         begin: Alignment.topLeft,
+  //         end: Alignment.bottomRight,
+  //         colors: [Color(0xFFF8F9FA), Color(0xFFE9ECEF)],
+  //       ),
+  //     ),
+  //     child: Center(
+  //       child: Padding(
+  //         padding: const EdgeInsets.all(32),
+  //         child: Container(
+  //           padding: const EdgeInsets.all(40),
+  //           decoration: BoxDecoration(
+  //             color: Colors.white,
+  //             borderRadius: BorderRadius.circular(20),
+  //             boxShadow: [
+  //               BoxShadow(
+  //                 color: Colors.black.withOpacity(0.1),
+  //                 blurRadius: 20,
+  //                 offset: const Offset(0, 10),
+  //               ),
+  //             ],
+  //           ),
+  //           child: Column(
+  //             mainAxisSize: MainAxisSize.min,
+  //             children: [
+  //               Container(
+  //                 padding: const EdgeInsets.all(24),
+  //                 decoration: BoxDecoration(
+  //                   color: const Color(0xFFFF6B35).withOpacity(0.1),
+  //                   borderRadius: BorderRadius.circular(50),
+  //                 ),
+  //                 child: const Icon(
+  //                   Icons.shopping_cart_outlined,
+  //                   size: 64,
+  //                   color: Color(0xFFFF6B35),
+  //                 ),
+  //               ),
+  //               const SizedBox(height: 24),
+  //               const Text(
+  //                 'Panier vide',
+  //                 style: TextStyle(
+  //                   fontSize: 24,
+  //                   fontWeight: FontWeight.bold,
+  //                   color: Color(0xFF2C3E50),
+  //                 ),
+  //               ),
+  //               const SizedBox(height: 12),
+  //               const Text(
+  //                 'Ajoutez des produits à votre panier pour procéder au paiement',
+  //                 style: TextStyle(
+  //                   fontSize: 16,
+  //                   color: Color(0xFF6C757D),
+  //                   height: 1.5,
+  //                 ),
+  //                 textAlign: TextAlign.center,
+  //               ),
+  //               const SizedBox(height: 32),
+  //               ElevatedButton(
+  //                 onPressed: () => Navigator.pushNamed(context, '/products'),
+  //                 style: ElevatedButton.styleFrom(
+  //                   backgroundColor: const Color(0xFF667EEA),
+  //                   foregroundColor: Colors.white,
+  //                   padding: const EdgeInsets.symmetric(
+  //                       horizontal: 32, vertical: 16),
+  //                   shape: RoundedRectangleBorder(
+  //                     borderRadius: BorderRadius.circular(30),
+  //                   ),
+  //                   elevation: 8,
+  //                 ),
+  //                 child: const Text(
+  //                   'DÉCOUVRIR NOS PRODUITS',
+  //                   style: TextStyle(
+  //                     fontWeight: FontWeight.bold,
+  //                     letterSpacing: 1,
+  //                   ),
+  //                 ),
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 
   Widget _buildCheckoutFlow(CartViewModel cartViewModel) {
     return Container(
@@ -466,7 +466,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   '${item.totalPrice.toStringAsFixed(2)} €',
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF28A745),
+                    color: Color(0xFF2C3E50),
                     fontSize: 16,
                   ),
                 ),
@@ -519,7 +519,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                 'Gratuite',
                 style: TextStyle(
                   fontSize: 16,
-                  color: Colors.green[600],
+                  color: Color(0xFF667EEA),
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -541,7 +541,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                 style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF28A745),
+                  color: Color(0xFF2C3E50),
                 ),
               ),
             ],
@@ -1216,7 +1216,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
               elevation: 8,
             ),
             child: Text(
-              nextLabel ?? 'SUIVANT',
+              nextLabel ?? 'Suivant',
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 letterSpacing: 1,

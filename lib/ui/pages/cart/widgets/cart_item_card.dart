@@ -122,14 +122,14 @@ class CartItemCard extends StatelessWidget {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
           decoration: BoxDecoration(
-            color: const Color(0xFF28A745).withOpacity(0.1),
+            color: const Color(0xFF667EEA).withOpacity(0.1),
             borderRadius: BorderRadius.circular(12),
           ),
           child: Text(
             cartItem.product.formattedPrice,
             style: const TextStyle(
               fontSize: 14,
-              color: Color(0xFF28A745),
+              color: Color(0xFF667EEA),
               fontWeight: FontWeight.w600,
             ),
           ),

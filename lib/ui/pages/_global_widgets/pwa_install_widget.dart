@@ -74,16 +74,11 @@ class _PWAInstallWidgetState extends State<PWAInstallWidget> {
       margin: const EdgeInsets.all(16),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            Theme.of(context).primaryColor,
-            Theme.of(context).primaryColor.withOpacity(0.8),
-          ],
-        ),
+        color: Color.fromARGB(255, 75, 110, 248),
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Theme.of(context).primaryColor.withOpacity(0.3),
+            color: Colors.black.withOpacity(0.2),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),
@@ -134,12 +129,12 @@ class _PWAInstallWidgetState extends State<PWAInstallWidget> {
                         ),
                       ),
                     )
-                  : const Icon(Icons.download, size: 20),
+                  : const Icon(Icons.download, size: 20, color: Colors.black,),
               label:
                   Text(_isLoading ? 'Installation...' : 'Installer maintenant'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,
-                foregroundColor: Theme.of(context).primaryColor,
+                foregroundColor: Colors.black,
                 padding: const EdgeInsets.symmetric(vertical: 12),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
