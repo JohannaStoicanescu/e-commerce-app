@@ -35,7 +35,7 @@ jobs:
           REPO_NAME="${GITHUB_REPOSITORY#*/}"
           # Mets "/" si tu utilises un site user/org ou un domaine custom :
           BASE_HREF="/${REPO_NAME}/"
-          flutter build web --release --base-href "$BASE_HREF" --web-renderer canvaskit
+          flutter build web --release --base-href "$BASE_HREF"
 
       - name: SPA 404 fallback
         run: |
