@@ -20,12 +20,12 @@ class CartNotLoggedIn extends StatelessWidget {
             padding: const EdgeInsets.all(32),
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  Color.fromARGB(255, 245, 249, 246),
-                  Color.fromARGB(255, 183, 193, 238)
-                ]),
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Color.fromARGB(255, 245, 249, 246),
+                    Color.fromARGB(255, 183, 193, 238)
+                  ]),
               borderRadius: BorderRadius.circular(20),
               boxShadow: [
                 BoxShadow(
@@ -33,7 +33,7 @@ class CartNotLoggedIn extends StatelessWidget {
                   blurRadius: 20,
                   offset: const Offset(0, 10),
                 ),
-              ],   
+              ],
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -97,7 +97,7 @@ class CartNotLoggedIn extends StatelessWidget {
                       backgroundColor: Colors.transparent,
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 32, vertical: 16),
+                          horizontal: 32, vertical: 16),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),

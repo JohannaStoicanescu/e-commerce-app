@@ -79,7 +79,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
           if (!authService.isLoggedIn) {
             return CartNotLoggedIn();
           }
-          
+
           return _buildCheckoutFlow(cartViewModel);
         },
       ),

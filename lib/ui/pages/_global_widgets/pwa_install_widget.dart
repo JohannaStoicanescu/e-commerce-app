@@ -129,7 +129,11 @@ class _PWAInstallWidgetState extends State<PWAInstallWidget> {
                         ),
                       ),
                     )
-                  : const Icon(Icons.download, size: 20, color: Colors.black,),
+                  : const Icon(
+                      Icons.download,
+                      size: 20,
+                      color: Colors.black,
+                    ),
               label:
                   Text(_isLoading ? 'Installation...' : 'Installer maintenant'),
               style: ElevatedButton.styleFrom(

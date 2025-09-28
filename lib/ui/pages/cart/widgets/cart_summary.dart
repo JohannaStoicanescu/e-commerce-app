@@ -125,7 +125,7 @@ class CartSummary extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
-                          Icons.payment_rounded, 
+                          Icons.payment_rounded,
                           size: 20,
                           color: Colors.white,
                         ),

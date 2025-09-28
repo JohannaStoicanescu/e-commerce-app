@@ -89,7 +89,7 @@ class OrderDetailsModal extends StatelessWidget {
     ];
     return '${date.day} ${months[date.month - 1]} ${date.year}';
   }
-  
+
   Widget _buildOrderInfoSection(Order order) {
     return Container(
       padding: const EdgeInsets.all(16),
