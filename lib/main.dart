@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'firebase_options.dart';
 import 'ui/pages/cart/cart_page.dart';
 import 'ui/pages/checkout/checkout_page.dart';
@@ -14,6 +15,7 @@ import 'ui/viewmodels/products_viewmodel.dart';
 import 'ui/viewmodels/cart_viewmodel.dart';
 import 'ui/viewmodels/orders_viewmodel.dart';
 import 'ui/viewmodels/checkout_viewmodel.dart';
+
 import 'data/services/auth_service.dart';
 import 'data/services/payment_service.dart';
 import 'data/models/product.dart';
@@ -21,11 +23,20 @@ import 'data/models/product.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  FlutterError.onError = (FlutterErrorDetails details) {
+    debugPrint('Flutter Error: ${details.exception}');
+    debugPrint('Stack trace: ${details.stack}');
+  };
 
-  PaymentService.init();
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+
+    PaymentService.init();
+  } catch (e) {
+    debugPrint('Initialization error: $e');
+  }
 
   runApp(const MyApp());
 }
@@ -49,6 +60,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             colorSchemeSeed: Colors.blue,
             useMaterial3: true,
+            textTheme: GoogleFonts.robotoTextTheme(),
           ),
           initialRoute: '/',
           routes: {
@@ -84,7 +96,22 @@ class MyApp extends StatelessWidget {
                   builder: (_) => Scaffold(
                     appBar: AppBar(title: const Text('Produit introuvable')),
                     body: Center(
-                        child: Text('Aucun produit fourni pour "$slug".')),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(Icons.error_outline,
+                              size: 64, color: Colors.grey),
+                          const SizedBox(height: 16),
+                          Text('Aucun produit fourni pour "$slug".'),
+                          const SizedBox(height: 16),
+                          ElevatedButton(
+                            onPressed: () => Navigator.pushNamedAndRemoveUntil(
+                                context, '/', (route) => false),
+                            child: const Text('Retour à l\'accueil'),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                   settings: settings,
                 );
