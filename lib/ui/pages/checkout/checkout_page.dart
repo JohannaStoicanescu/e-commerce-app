@@ -1,3 +1,5 @@
+import '../checkout/widgets/index.dart';
+import '../cart/widgets/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -74,197 +76,15 @@ class _CheckoutPageState extends State<CheckoutPage> {
       drawer: const AppDrawer(),
       body: Consumer2<CartViewModel, AuthService>(
         builder: (context, cartViewModel, authService, child) {
-          // if (!authService.isLoggedIn) {
-          //   return _buildNotLoggedIn();
-          // }
-
-          // if (cartViewModel.cartItems.isEmpty) {
-          //   return _buildEmptyCart();
-          // }
-
+          if (!authService.isLoggedIn) {
+            return CartNotLoggedIn();
+          }
+          
           return _buildCheckoutFlow(cartViewModel);
         },
       ),
     );
   }
-
-  // Widget _buildNotLoggedIn() {
-  //   return Container(
-  //     decoration: const BoxDecoration(
-  //       gradient: LinearGradient(
-  //         begin: Alignment.topLeft,
-  //         end: Alignment.bottomRight,
-  //         colors: [Color(0xFFF8F9FA), Color(0xFFE9ECEF)],
-  //       ),
-  //     ),
-  //     child: Center(
-  //       child: Padding(
-  //         padding: const EdgeInsets.all(32),
-  //         child: Container(
-  //           padding: const EdgeInsets.all(32),
-  //           decoration: BoxDecoration(
-  //             color: Colors.white,
-  //             borderRadius: BorderRadius.circular(20),
-  //             boxShadow: [
-  //               BoxShadow(
-  //                 color: Colors.black.withOpacity(0.1),
-  //                 blurRadius: 20,
-  //                 offset: const Offset(0, 10),
-  //               ),
-  //             ],
-  //           ),
-  //           child: Column(
-  //             mainAxisSize: MainAxisSize.min,
-  //             children: [
-  //               Container(
-  //                 padding: const EdgeInsets.all(20),
-  //                 decoration: BoxDecoration(
-  //                   gradient: const LinearGradient(
-  //                     colors: [Color(0xFF667EEA), Color(0xFF764BA2)],
-  //                   ),
-  //                   borderRadius: BorderRadius.circular(50),
-  //                 ),
-  //                 child: const Icon(
-  //                   Icons.login_rounded,
-  //                   size: 48,
-  //                   color: Colors.white,
-  //                 ),
-  //               ),
-  //               const SizedBox(height: 24),
-  //               const Text(
-  //                 'Connexion requise',
-  //                 style: TextStyle(
-  //                   fontSize: 24,
-  //                   fontWeight: FontWeight.bold,
-  //                   color: Color(0xFF2C3E50),
-  //                 ),
-  //               ),
-  //               const SizedBox(height: 12),
-  //               const Text(
-  //                 'Vous devez être connecté pour finaliser votre commande',
-  //                 style: TextStyle(
-  //                   fontSize: 16,
-  //                   color: Color(0xFF6C757D),
-  //                   height: 1.5,
-  //                 ),
-  //                 textAlign: TextAlign.center,
-  //               ),
-  //               const SizedBox(height: 32),
-  //               ElevatedButton(
-  //                 onPressed: () => Navigator.pushNamed(context, '/login'),
-  //                 style: ElevatedButton.styleFrom(
-  //                   backgroundColor: const Color(0xFF667EEA),
-  //                   foregroundColor: Colors.white,
-  //                   padding: const EdgeInsets.symmetric(
-  //                       horizontal: 32, vertical: 16),
-  //                   shape: RoundedRectangleBorder(
-  //                     borderRadius: BorderRadius.circular(30),
-  //                   ),
-  //                   elevation: 8,
-  //                 ),
-  //                 child: const Text(
-  //                   'SE CONNECTER',
-  //                   style: TextStyle(
-  //                     fontWeight: FontWeight.bold,
-  //                     letterSpacing: 1,
-  //                   ),
-  //                 ),
-  //               ),
-  //             ],
-  //           ),
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
-
-  // Widget _buildEmptyCart() {
-  //   return Container(
-  //     decoration: const BoxDecoration(
-  //       gradient: LinearGradient(
-  //         begin: Alignment.topLeft,
-  //         end: Alignment.bottomRight,
-  //         colors: [Color(0xFFF8F9FA), Color(0xFFE9ECEF)],
-  //       ),
-  //     ),
-  //     child: Center(
-  //       child: Padding(
-  //         padding: const EdgeInsets.all(32),
-  //         child: Container(
-  //           padding: const EdgeInsets.all(40),
-  //           decoration: BoxDecoration(
-  //             color: Colors.white,
-  //             borderRadius: BorderRadius.circular(20),
-  //             boxShadow: [
-  //               BoxShadow(
-  //                 color: Colors.black.withOpacity(0.1),
-  //                 blurRadius: 20,
-  //                 offset: const Offset(0, 10),
-  //               ),
-  //             ],
-  //           ),
-  //           child: Column(
-  //             mainAxisSize: MainAxisSize.min,
-  //             children: [
-  //               Container(
-  //                 padding: const EdgeInsets.all(24),
-  //                 decoration: BoxDecoration(
-  //                   color: const Color(0xFFFF6B35).withOpacity(0.1),
-  //                   borderRadius: BorderRadius.circular(50),
-  //                 ),
-  //                 child: const Icon(
-  //                   Icons.shopping_cart_outlined,
-  //                   size: 64,
-  //                   color: Color(0xFFFF6B35),
-  //                 ),
-  //               ),
-  //               const SizedBox(height: 24),
-  //               const Text(
-  //                 'Panier vide',
-  //                 style: TextStyle(
-  //                   fontSize: 24,
-  //                   fontWeight: FontWeight.bold,
-  //                   color: Color(0xFF2C3E50),
-  //                 ),
-  //               ),
-  //               const SizedBox(height: 12),
-  //               const Text(
-  //                 'Ajoutez des produits à votre panier pour procéder au paiement',
-  //                 style: TextStyle(
-  //                   fontSize: 16,
-  //                   color: Color(0xFF6C757D),
-  //                   height: 1.5,
-  //                 ),
-  //                 textAlign: TextAlign.center,
-  //               ),
-  //               const SizedBox(height: 32),
-  //               ElevatedButton(
-  //                 onPressed: () => Navigator.pushNamed(context, '/products'),
-  //                 style: ElevatedButton.styleFrom(
-  //                   backgroundColor: const Color(0xFF667EEA),
-  //                   foregroundColor: Colors.white,
-  //                   padding: const EdgeInsets.symmetric(
-  //                       horizontal: 32, vertical: 16),
-  //                   shape: RoundedRectangleBorder(
-  //                     borderRadius: BorderRadius.circular(30),
-  //                   ),
-  //                   elevation: 8,
-  //                 ),
-  //                 child: const Text(
-  //                   'DÉCOUVRIR NOS PRODUITS',
-  //                   style: TextStyle(
-  //                     fontWeight: FontWeight.bold,
-  //                     letterSpacing: 1,
-  //                   ),
-  //                 ),
-  //               ),
-  //             ],
-  //           ),
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
 
   Widget _buildCheckoutFlow(CartViewModel cartViewModel) {
     return Container(
@@ -277,7 +97,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
       ),
       child: Column(
         children: [
-          _buildStepIndicator(),
+          CheckoutStepIndicator(currentStep: _currentStep),
           Expanded(
             child: PageView(
               controller: _pageController,
@@ -291,81 +111,6 @@ class _CheckoutPageState extends State<CheckoutPage> {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildStepIndicator() {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black12,
-            blurRadius: 4,
-            offset: Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Row(
-        children: [
-          _buildStepItem(0, 'Résumé', Icons.receipt_long),
-          _buildStepConnector(),
-          _buildStepItem(1, 'Livraison', Icons.local_shipping),
-          _buildStepConnector(),
-          _buildStepItem(2, 'Paiement', Icons.payment),
-          _buildStepConnector(),
-          _buildStepItem(3, 'Confirmation', Icons.check_circle),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildStepItem(int step, String title, IconData icon) {
-    final isActive = _currentStep == step;
-    final isCompleted = _currentStep > step;
-
-    return Expanded(
-      child: Column(
-        children: [
-          Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              color: isActive || isCompleted
-                  ? const Color(0xFF667EEA)
-                  : Colors.grey[300],
-              shape: BoxShape.circle,
-            ),
-            child: Icon(
-              isCompleted ? Icons.check : icon,
-              color: isActive || isCompleted ? Colors.white : Colors.grey[600],
-              size: 20,
-            ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w500,
-              color: isActive || isCompleted
-                  ? const Color(0xFF2C3E50)
-                  : Colors.grey[600],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildStepConnector() {
-    return Expanded(
-      child: Container(
-        height: 2,
-        margin: const EdgeInsets.only(bottom: 20),
-        color: Colors.grey[300],
       ),
     );
   }
@@ -390,161 +135,15 @@ class _CheckoutPageState extends State<CheckoutPage> {
               itemCount: cartViewModel.cartItems.length,
               itemBuilder: (context, index) {
                 final item = cartViewModel.cartItems[index];
-                return _buildOrderItem(item);
+                return CheckoutOrderItems(item: item);
               },
             ),
           ),
-          _buildOrderTotal(cartViewModel),
+          CheckoutOrderTotal(cartViewModel: cartViewModel),
           const SizedBox(height: 20),
-          _buildNavigationButtons(
+          CheckoutNavigationButtons(
             onNext: () => _nextStep(),
             showBack: false,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildOrderItem(item) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Row(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: Image.network(
-              item.product.image,
-              width: 60,
-              height: 60,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) {
-                return Container(
-                  width: 60,
-                  height: 60,
-                  color: Colors.grey[200],
-                  child: const Icon(Icons.image_not_supported),
-                );
-              },
-            ),
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  item.product.title,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xFF2C3E50),
-                  ),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  'Quantité: ${item.quantity}',
-                  style: TextStyle(
-                    color: Colors.grey[600],
-                    fontSize: 14,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  '${item.totalPrice.toStringAsFixed(2)} €',
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF2C3E50),
-                    fontSize: 16,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildOrderTotal(CartViewModel cartViewModel) {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                'Sous-total:',
-                style: TextStyle(fontSize: 16),
-              ),
-              Text(
-                cartViewModel.formattedTotal,
-                style: const TextStyle(fontSize: 16),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                'Livraison:',
-                style: TextStyle(fontSize: 16),
-              ),
-              Text(
-                'Gratuite',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Color(0xFF667EEA),
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ],
-          ),
-          const Divider(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                'Total:',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                cartViewModel.formattedTotal,
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF2C3E50),
-                ),
-              ),
-            ],
           ),
         ],
       ),
@@ -572,7 +171,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    _buildTextField(
+                    CheckoutTextField(
                       controller: _fullNameController,
                       label: 'Nom complet',
                       icon: Icons.person,
@@ -580,7 +179,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                           value?.isEmpty == true ? 'Ce champ est requis' : null,
                     ),
                     const SizedBox(height: 16),
-                    _buildTextField(
+                    CheckoutTextField(
                       controller: _streetController,
                       label: 'Adresse',
                       icon: Icons.home,
@@ -592,7 +191,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       children: [
                         Expanded(
                           flex: 2,
-                          child: _buildTextField(
+                          child: CheckoutTextField(
                             controller: _cityController,
                             label: 'Ville',
                             icon: Icons.location_city,
@@ -603,7 +202,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                         ),
                         const SizedBox(width: 16),
                         Expanded(
-                          child: _buildTextField(
+                          child: CheckoutTextField(
                             controller: _postalCodeController,
                             label: 'Code postal',
                             icon: Icons.markunread_mailbox,
@@ -616,7 +215,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       ],
                     ),
                     const SizedBox(height: 16),
-                    _buildTextField(
+                    CheckoutTextField(
                       controller: _countryController,
                       label: 'Pays',
                       icon: Icons.public,
@@ -624,7 +223,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                           value?.isEmpty == true ? 'Ce champ est requis' : null,
                     ),
                     const SizedBox(height: 16),
-                    _buildTextField(
+                    CheckoutTextField(
                       controller: _phoneController,
                       label: 'Téléphone (optionnel)',
                       icon: Icons.phone,
@@ -635,7 +234,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
               ),
             ),
             const SizedBox(height: 20),
-            _buildNavigationButtons(
+            CheckoutNavigationButtons(
               onBack: () => _previousStep(),
               onNext: () {
                 if (_shippingFormKey.currentState?.validate() == true) {
@@ -707,7 +306,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    _buildTextField(
+                    CheckoutTextField(
                       controller: _cardNameController,
                       label: 'Nom sur la carte',
                       icon: Icons.credit_card,
@@ -715,7 +314,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                           value?.isEmpty == true ? 'Ce champ est requis' : null,
                     ),
                     const SizedBox(height: 16),
-                    _buildTextField(
+                    CheckoutTextField(
                       controller: _cardNumberController,
                       label: 'Numéro de carte',
                       icon: Icons.credit_card_outlined,
@@ -743,7 +342,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       children: [
                         Expanded(
                           flex: 2,
-                          child: _buildTextField(
+                          child: CheckoutTextField(
                             controller: _cardExpiryController,
                             label: 'Expiration (MM/AA)',
                             icon: Icons.calendar_month,
@@ -764,7 +363,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                         ),
                         const SizedBox(width: 16),
                         Expanded(
-                          child: _buildTextField(
+                          child: CheckoutTextField(
                             controller: _cardCvvController,
                             label: 'CVV',
                             icon: Icons.lock,
@@ -786,7 +385,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       ],
                     ),
                     const SizedBox(height: 16),
-                    _buildTextField(
+                    CheckoutTextField(
                       controller: _emailController,
                       label: 'Email',
                       icon: Icons.email,
@@ -802,7 +401,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       },
                     ),
                     const SizedBox(height: 16),
-                    _buildTextField(
+                    CheckoutTextField(
                       controller: _billingPhoneController,
                       label: 'Téléphone (optionnel)',
                       icon: Icons.phone,
@@ -839,7 +438,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                 style: const TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
-                                  color: Color(0xFF28A745),
+                                  color: Color(0xFF667EEA),
                                 ),
                               ),
                             ],
@@ -852,14 +451,14 @@ class _CheckoutPageState extends State<CheckoutPage> {
               ),
             ),
             const SizedBox(height: 20),
-            _buildNavigationButtons(
+            CheckoutNavigationButtons(
               onBack: () => _previousStep(),
               onNext: () {
                 if (_billingFormKey.currentState?.validate() == true) {
                   _processPayment(cartViewModel);
                 }
               },
-              nextLabel: 'PROCÉDER AU PAIEMENT',
+              nextLabel: 'Procéder au paiement',
             ),
           ],
         ),
@@ -1013,14 +612,14 @@ class _CheckoutPageState extends State<CheckoutPage> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                padding: const EdgeInsets.all(20),
+                padding: const EdgeInsets.all(15),
                 decoration: BoxDecoration(
                   color: Colors.green[50],
                   borderRadius: BorderRadius.circular(50),
                 ),
                 child: Icon(
                   Icons.check_circle,
-                  size: 64,
+                  size: 50,
                   color: Colors.green[600],
                 ),
               ),
@@ -1028,10 +627,11 @@ class _CheckoutPageState extends State<CheckoutPage> {
               const Text(
                 'Commande confirmée !',
                 style: TextStyle(
-                  fontSize: 24,
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: Color(0xFF2C3E50),
                 ),
+                textAlign: TextAlign.center,
               ),
               const SizedBox(height: 12),
               Text(
@@ -1042,35 +642,10 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              const SizedBox(height: 8),
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                decoration: BoxDecoration(
-                  color: Colors.green[50],
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: Colors.green[200]!),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.shopping_cart_outlined,
-                        size: 16, color: Colors.green[600]),
-                    const SizedBox(width: 8),
-                    Text(
-                      'Votre panier a été vidé automatiquement',
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.green[600],
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
               const SizedBox(height: 20),
               Container(
                 padding: const EdgeInsets.all(16),
+                width: double.infinity,
                 decoration: BoxDecoration(
                   color: Colors.grey[50],
                   borderRadius: BorderRadius.circular(12),
@@ -1101,13 +676,15 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       style: OutlinedButton.styleFrom(
                         foregroundColor: const Color(0xFF667EEA),
                         padding: const EdgeInsets.symmetric(vertical: 16),
+                        side: BorderSide(color: const Color(0xFF667EEA)),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
+                          borderRadius: BorderRadius.circular(12),
                         ),
                       ),
                       child: const Text(
-                        'MES COMMANDES',
+                        'Mes commandes',
                         style: TextStyle(fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.center,
                       ),
                     ),
                   ),
@@ -1123,16 +700,17 @@ class _CheckoutPageState extends State<CheckoutPage> {
                         foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
+                          borderRadius: BorderRadius.circular(12),
                         ),
                         elevation: 8,
                       ),
                       child: const Text(
-                        'RETOUR AU SHOPPING',
+                        'Retour à l\'accueil',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           letterSpacing: 1,
                         ),
+                        textAlign: TextAlign.center,
                       ),
                     ),
                   ),
@@ -1142,89 +720,6 @@ class _CheckoutPageState extends State<CheckoutPage> {
           ),
         ),
       ),
-    );
-  }
-
-  Widget _buildTextField({
-    required TextEditingController controller,
-    required String label,
-    required IconData icon,
-    TextInputType? keyboardType,
-    String? Function(String?)? validator,
-    String? hintText,
-    List<TextInputFormatter>? inputFormatters,
-  }) {
-    return TextFormField(
-      controller: controller,
-      keyboardType: keyboardType,
-      validator: validator,
-      inputFormatters: inputFormatters,
-      decoration: InputDecoration(
-        labelText: label,
-        hintText: hintText,
-        prefixIcon: Icon(icon, color: const Color(0xFF667EEA)),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: Colors.grey[300]!),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: Color(0xFF667EEA), width: 2),
-        ),
-        filled: true,
-        fillColor: Colors.white,
-      ),
-    );
-  }
-
-  Widget _buildNavigationButtons({
-    VoidCallback? onBack,
-    VoidCallback? onNext,
-    String? nextLabel,
-    bool showBack = true,
-  }) {
-    return Row(
-      children: [
-        if (showBack && onBack != null)
-          Expanded(
-            child: OutlinedButton(
-              onPressed: onBack,
-              style: OutlinedButton.styleFrom(
-                foregroundColor: const Color(0xFF667EEA),
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              child: const Text(
-                'PRÉCÉDENT',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ),
-          ),
-        if (showBack && onBack != null) const SizedBox(width: 16),
-        Expanded(
-          child: ElevatedButton(
-            onPressed: onNext,
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF667EEA),
-              foregroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-              elevation: 8,
-            ),
-            child: Text(
-              nextLabel ?? 'Suivant',
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                letterSpacing: 1,
-              ),
-            ),
-          ),
-        ),
-      ],
     );
   }
 
@@ -1280,7 +775,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
     );
 
     if (!success) {
-      // Error will be displayed in the confirmation step
+      return;
     }
   }
 }
@@ -1318,7 +813,7 @@ class ExpiryDateInputFormatter extends TextInputFormatter {
     TextEditingValue newValue,
   ) {
     final text = newValue.text.replaceAll('/', '');
-    if (text.length > 4) return oldValue; // Max length
+    if (text.length > 4) return oldValue;
 
     final buffer = StringBuffer();
     for (int i = 0; i < text.length; i++) {

@@ -19,13 +19,6 @@ class HomeContainerCategories extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 24),
-          // GridView.count(
-          //   shrinkWrap: true,
-          //   physics: const NeverScrollableScrollPhysics(),
-          //   crossAxisCount: 2,
-          //   crossAxisSpacing: 16,
-          //   mainAxisSpacing: 16,
-          //   childAspectRatio: 1.2,
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
