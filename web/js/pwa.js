@@ -4,13 +4,11 @@ let installable = false;
 
 window.addEventListener("beforeinstallprompt", (e) => {
   console.log("beforeinstallprompt fired");
-  // Prevent Chrome 67 and earlier from automatically showing the prompt
   e.preventDefault();
-  // Stash the event so it can be triggered later.
+
   deferredPrompt = e;
   installable = true;
 
-  // Notify Flutter that PWA can be installed
   if (window.flutter_js) {
     window.flutter_js.dispatchEvent(new CustomEvent("pwa-installable"));
   }
@@ -22,26 +20,37 @@ window.addEventListener("appinstalled", (evt) => {
   deferredPrompt = null;
 });
 
-// Function to be called from Flutter
 window.installPWA = async function () {
-  if (deferredPrompt) {
-    // Show the prompt
-    deferredPrompt.prompt();
+  try {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
 
-    // Wait for the user to respond to the prompt
-    const { outcome } = await deferredPrompt.userChoice;
-    console.log(`User response to the install prompt: ${outcome}`);
+      const { outcome } = await deferredPrompt.userChoice;
+      console.log(`User response to the install prompt: ${outcome}`);
 
-    // We no longer need the prompt
-    deferredPrompt = null;
-    installable = false;
+      deferredPrompt = null;
+      installable = false;
 
-    return outcome === "accepted";
+      return outcome === "accepted";
+    }
+    return false;
+  } catch (error) {
+    console.error("Error during PWA installation:", error);
+    return false;
   }
-  return false;
 };
 
-// Function to check if PWA can be installed
 window.canInstallPWA = function () {
   return installable;
+};
+
+window.isPWASupported = function () {
+  return "serviceWorker" in navigator && "PushManager" in window;
+};
+
+window.isRunningAsPWA = function () {
+  return (
+    window.matchMedia("(display-mode: standalone)").matches ||
+    window.navigator.standalone === true
+  );
 };
