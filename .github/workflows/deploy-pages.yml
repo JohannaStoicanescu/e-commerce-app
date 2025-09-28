@@ -30,12 +30,12 @@ jobs:
       - name: Pub get
         run: flutter pub get
 
-      - name: Build Flutter (release)
+      - name: Build Flutter
         run: |
           REPO_NAME="${GITHUB_REPOSITORY#*/}"
           # Mets "/" si tu utilises un site user/org ou un domaine custom :
           BASE_HREF="/${REPO_NAME}/"
-          flutter build web --release --base-href "$BASE_HREF"
+          flutter build web --profile --base-href "$BASE_HREF" --web-renderer canvaskit --source-maps --no-tree-shake-icons
 
       - name: SPA 404 fallback
         run: |

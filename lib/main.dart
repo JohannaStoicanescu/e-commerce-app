@@ -3,6 +3,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'firebase_options.dart';
+import 'services/error_handler.dart';
+import 'config/web_config.dart';
+import 'widgets/error_boundary.dart';
 import 'ui/pages/cart/cart_page.dart';
 import 'ui/pages/checkout/checkout_page.dart';
 import 'ui/pages/home/home_page.dart';
@@ -23,10 +26,9 @@ import 'data/models/product.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  FlutterError.onError = (FlutterErrorDetails details) {
-    debugPrint('Flutter Error: ${details.exception}');
-    debugPrint('Stack trace: ${details.stack}');
-  };
+  // Initialize error handling
+  ErrorHandler.initialize();
+  WebConfig.configureApp();
 
   try {
     await Firebase.initializeApp(
@@ -46,7 +48,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
+    return ErrorBoundary(
+      child: MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => AuthService()),
           ChangeNotifierProvider(create: (_) => ProductsViewModel()),
@@ -131,6 +134,8 @@ class MyApp extends StatelessWidget {
               settings: settings,
             );
           },
-        ));
+        ),
+      ),
+    );
   }
 }
