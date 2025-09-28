@@ -21,7 +21,6 @@ class _ErrorBoundaryState extends State<ErrorBoundary> {
   @override
   void initState() {
     super.initState();
-    // Capture Flutter errors
     FlutterError.onError = (FlutterErrorDetails details) {
       if (mounted) {
         setState(() {

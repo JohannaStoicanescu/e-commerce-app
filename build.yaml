@@ -1,0 +1,9 @@
+# Web-specific build configuration to reduce issues
+targets:
+  $default:
+    builders:
+      build_web_compilers|entrypoint:
+        options:
+          dart2js_args:
+            - --no-minify
+            - --enable-asserts

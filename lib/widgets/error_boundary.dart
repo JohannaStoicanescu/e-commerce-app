@@ -44,7 +44,7 @@ class _ErrorBoundaryState extends State<ErrorBoundary> {
     if (_hasError) {
       return widget.errorWidget ?? _buildDefaultErrorWidget();
     }
-    
+
     return widget.child;
   }
 

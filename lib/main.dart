@@ -26,7 +26,6 @@ import 'data/models/product.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialize error handling
   ErrorHandler.initialize();
   WebConfig.configureApp();
 
