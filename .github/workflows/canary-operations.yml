@@ -18,9 +18,12 @@ on:
         type: string
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
+  issues: write
+  pull-requests: write
+  actions: write
 
 jobs:
   promote-canary:
@@ -106,27 +109,55 @@ jobs:
           git tag -a "v${VERSION}" -m "Promoted canary to stable - ${VERSION}"
           git push origin "v${VERSION}"
 
-      - name: Notify promotion success
+      - name: Create promotion summary
+        run: |
+          cat >> $GITHUB_STEP_SUMMARY << EOF
+          # 🚀 Canary Promoted to Stable
+
+          **Canary has been successfully promoted to stable!**
+
+          - **Promoted at**: $(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          - **Promoted by**: ${{ github.actor }}
+          - **Commit**: \`${GITHUB_SHA}\`
+          - **Production URL**: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
+
+          ## ✅ Success
+          The canary deployment has been promoted to the stable production environment.
+          All traffic is now routed to the new stable version.
+
+          ## Next Steps
+          - Monitor the production environment for any issues
+          - The canary branch is now ready for the next deployment cycle
+          - Consider creating a release tag for this stable version
+          EOF
+
+      - name: Try to create promotion issue (optional)
+        continue-on-error: true
         uses: actions/github-script@v7
         with:
           script: |
-            const { owner, repo } = context.repo;
+            try {
+              const { owner, repo } = context.repo;
 
-            await github.rest.issues.create({
-              owner,
-              repo,
-              title: `🚀 Canary Promoted to Stable - ${new Date().toISOString().split('T')[0]}`,
-              body: `**Canary has been successfully promoted to stable!**
-              
-              - **Promoted at**: ${new Date().toISOString()}
-              - **Promoted by**: @${{ github.actor }}
-              - **Commit**: \`${context.sha}\`
-              - **Production URL**: https://${owner}.github.io/${repo}/
-              
-              The canary deployment has been promoted to the stable production environment.
-              All traffic is now routed to the new stable version.`,
-              labels: ['deployment', 'promotion']
-            });
+              await github.rest.issues.create({
+                owner,
+                repo,
+                title: `🚀 Canary Promoted to Stable - ${new Date().toISOString().split('T')[0]}`,
+                body: `**Canary has been successfully promoted to stable!**
+                
+                - **Promoted at**: ${new Date().toISOString()}
+                - **Promoted by**: @${{ github.actor }}
+                - **Commit**: \`${context.sha}\`
+                - **Production URL**: https://${owner}.github.io/${repo}/
+                
+                The canary deployment has been promoted to the stable production environment.
+                All traffic is now routed to the new stable version.`,
+                labels: ['deployment', 'promotion']
+              });
+              console.log('✅ Promotion issue created successfully');
+            } catch (error) {
+              console.log('ℹ️ Could not create promotion issue - check workflow summary for details');
+            }
 
   rollback-canary:
     name: Rollback Canary
