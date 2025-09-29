@@ -1,0 +1,351 @@
+name: Canary Deployment
+
+on:
+  push:
+    branches: [dev]
+  workflow_dispatch:
+    inputs:
+      traffic_percentage:
+        description: "Percentage of traffic to route to canary (0-100)"
+        required: false
+        default: "10"
+        type: string
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: "canary-deploy"
+  cancel-in-progress: false
+
+env:
+  CANARY_SUBDOMAIN: "canary"
+
+jobs:
+  build-canary:
+    name: Build Canary Release
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+          cache: true
+
+      - name: Get dependencies
+        run: flutter pub get
+
+      - name: Run tests
+        run: flutter test
+
+      - name: Generate version
+        id: version
+        run: |
+          VERSION=$(date +%Y%m%d-%H%M%S)-${GITHUB_SHA:0:7}
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+          echo "Generated version: ${VERSION}"
+
+      - name: Build Flutter Web (canary)
+        run: |
+          REPO_NAME="${GITHUB_REPOSITORY#*/}"
+          BASE_HREF="/${REPO_NAME}/canary/"
+          flutter build web --release --base-href "$BASE_HREF" --dart-define=ENVIRONMENT=canary --dart-define=VERSION=${{ steps.version.outputs.version }}
+
+      - name: Prepare canary build
+        run: |
+          mkdir -p canary-build/canary
+          cp -r build/web/* canary-build/canary/
+          cp build/web/index.html canary-build/canary/404.html
+          echo "user-agent: *" > canary-build/canary/robots.txt
+          echo "disallow: /" >> canary-build/canary/robots.txt
+
+      - name: Upload canary artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: canary-build-${{ steps.version.outputs.version }}
+          path: canary-build/
+          retention-days: 30
+
+  deploy-canary:
+    name: Deploy Canary
+    needs: build-canary
+    runs-on: ubuntu-latest
+    environment:
+      name: canary
+      url: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/canary/
+
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: main-branch
+
+      - name: Download canary artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: canary-build-${{ needs.build-canary.outputs.version }}
+          path: canary-build/
+
+      - name: Setup GitHub Pages structure
+        run: |
+          # Create the pages structure
+          mkdir -p pages-deploy
+
+          # Copy existing main build if it exists
+          if [ -d "main-branch/build/web" ]; then
+            cp -r main-branch/build/web/* pages-deploy/
+          fi
+
+          # Add canary build
+          mkdir -p pages-deploy/canary
+          cp -r canary-build/canary/* pages-deploy/canary/
+
+          # Create traffic routing script
+          cat > pages-deploy/traffic-router.js << 'EOF'
+          (function() {
+            const CANARY_PERCENTAGE = ${{ github.event.inputs.traffic_percentage || '10' }};
+            const CANARY_PATH = '/canary/';
+            
+            function shouldRouteToCanary() {
+              // Check if user is already on canary
+              if (window.location.pathname.startsWith(CANARY_PATH)) {
+                return false; // Already on canary
+              }
+              
+              // Check localStorage for sticky routing
+              const stickyRoute = localStorage.getItem('canary-route');
+              if (stickyRoute === 'canary') {
+                return true;
+              }
+              if (stickyRoute === 'stable') {
+                return false;
+              }
+              
+              // Random routing based on percentage
+              const random = Math.random() * 100;
+              const route = random < CANARY_PERCENTAGE;
+              
+              // Store the routing decision for session stickiness
+              localStorage.setItem('canary-route', route ? 'canary' : 'stable');
+              
+              return route;
+            }
+            
+            // Add canary indicator if on canary
+            if (window.location.pathname.startsWith(CANARY_PATH)) {
+              const indicator = document.createElement('div');
+              indicator.innerHTML = '🐤 CANARY BUILD';
+              indicator.style.cssText = `
+                position: fixed;
+                top: 0;
+                right: 0;
+                background: #ff9800;
+                color: white;
+                padding: 4px 8px;
+                font-size: 12px;
+                z-index: 10000;
+                border-radius: 0 0 0 4px;
+              `;
+              document.body.appendChild(indicator);
+            } else if (shouldRouteToCanary()) {
+              // Route to canary
+              const currentPath = window.location.pathname + window.location.search + window.location.hash;
+              const canaryUrl = window.location.origin + CANARY_PATH + currentPath.substring(1);
+              window.location.replace(canaryUrl);
+            }
+          })();
+          EOF
+
+          # Update main index.html to include traffic router
+          if [ -f "pages-deploy/index.html" ]; then
+            sed -i 's|</head>|<script src="traffic-router.js"></script></head>|' pages-deploy/index.html
+          fi
+
+          # Create .nojekyll file
+          touch pages-deploy/.nojekyll
+
+          # Create deployment info
+          cat > pages-deploy/deployment-info.json << EOF
+          {
+            "canary": {
+              "version": "${{ needs.build-canary.outputs.version }}",
+              "deployed_at": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+              "commit": "${GITHUB_SHA}",
+              "traffic_percentage": ${{ github.event.inputs.traffic_percentage || '10' }}
+            }
+          }
+          EOF
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: pages-deploy/
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Create deployment summary
+        if: github.event_name == 'push'
+        run: |
+          VERSION="${{ needs.build-canary.outputs.version }}"
+          TRAFFIC_PERCENTAGE="${{ github.event.inputs.traffic_percentage || '10' }}"
+          CANARY_URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/canary/"
+
+          cat >> $GITHUB_STEP_SUMMARY << EOF
+          # 🐤 Canary Deployment Successful
+
+          - **Version**: \`${VERSION}\`
+          - **Traffic Percentage**: ${TRAFFIC_PERCENTAGE}%
+          - **Canary URL**: [${CANARY_URL}](${CANARY_URL})
+          - **Deployed at**: $(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          - **Commit**: \`${GITHUB_SHA}\`
+
+          The canary deployment is now live and receiving ${TRAFFIC_PERCENTAGE}% of traffic.
+
+          ## Next Steps
+          - Monitor the [canary dashboard](${CANARY_URL}../canary-dashboard.html)
+          - Use the **Canary Operations** workflow to promote, rollback, or adjust traffic
+          - Watch for any performance or error rate changes
+
+          ## Quick Actions
+          Use the \`Canary Operations\` workflow with these operations:
+          - **promote**: Move canary to stable production
+          - **rollback**: Revert to last stable version  
+          - **adjust-traffic**: Change traffic percentage
+          EOF
+
+      - name: Try to comment on commit (optional)
+        if: github.event_name == 'push'
+        continue-on-error: true
+        uses: actions/github-script@v7
+        with:
+          script: |
+            try {
+              const { owner, repo } = context.repo;
+              const sha = context.sha;
+              const version = "${{ needs.build-canary.outputs.version }}";
+              const trafficPercentage = ${{ github.event.inputs.traffic_percentage || '10' }};
+
+              const body = `🐤 **Canary Deployment Successful**
+
+              - **Version**: \`${version}\`
+              - **Traffic Percentage**: ${trafficPercentage}%
+              - **Canary URL**: https://${owner}.github.io/${repo}/canary/
+              - **Deployed at**: ${new Date().toISOString()}
+
+              The canary deployment is now live and receiving ${trafficPercentage}% of traffic.
+
+              **Next Steps**: Use the Canary Operations workflow for promote/rollback/traffic adjustment.`;
+
+              await github.rest.repos.createCommitComment({
+                owner,
+                repo,
+                commit_sha: sha,
+                body
+              });
+              
+              console.log('✅ Commit comment created successfully');
+            } catch (error) {
+              console.log('ℹ️ Could not create commit comment (insufficient permissions)');
+              console.log('📋 Deployment summary is available in the workflow summary instead');
+            }
+
+  health-check:
+    name: Canary Health Check
+    needs: [build-canary, deploy-canary]
+    runs-on: ubuntu-latest
+    if: always()
+
+    steps:
+      - name: Wait for deployment
+        run: sleep 30
+
+      - name: Health check canary deployment
+        run: |
+          CANARY_URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/canary/"
+
+          echo "Checking canary deployment health..."
+
+          # Check if canary is accessible
+          if curl -f -s -o /dev/null "$CANARY_URL"; then
+            echo "✅ Canary deployment is accessible"
+            exit_code=0
+          else
+            echo "❌ Canary deployment is not accessible"
+            exit_code=1
+          fi
+
+          # Check deployment info
+          if curl -f -s "$CANARY_URL../deployment-info.json" | jq -e '.canary.version' > /dev/null; then
+            echo "✅ Deployment info is valid"
+          else
+            echo "❌ Deployment info is invalid"
+            exit_code=1
+          fi
+
+          exit $exit_code
+
+      - name: Create failure summary
+        if: failure()
+        run: |
+          VERSION="${{ needs.build-canary.outputs.version }}"
+
+          cat >> $GITHUB_STEP_SUMMARY << EOF
+          # 🚨 Canary Deployment Health Check Failed
+
+          - **Version**: \`${VERSION}\`
+          - **Failed at**: $(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          - **Commit**: \`${GITHUB_SHA}\`
+
+          ## ⚠️ Action Required
+          The canary deployment health check failed. Consider:
+
+          1. **Check the logs** above for specific error details
+          2. **Verify the canary URL** is accessible
+          3. **Use Canary Operations workflow** to rollback if necessary
+          4. **Investigate the issue** before attempting another deployment
+
+          ## Quick Rollback
+          Use the \`Canary Operations\` workflow with operation \`rollback\` to revert to the last stable version.
+          EOF
+
+      - name: Try to notify on failure (optional)
+        if: failure()
+        continue-on-error: true
+        uses: actions/github-script@v7
+        with:
+          script: |
+            try {
+              const { owner, repo } = context.repo;
+              const sha = context.sha;
+              const version = "${{ needs.build-canary.outputs.version }}";
+
+              const body = `🚨 **Canary Health Check Failed**
+              
+              Version: \`${version}\` - Failed at: ${new Date().toISOString()}
+              
+              Check workflow summary for details and consider rollback.`;
+
+              await github.rest.repos.createCommitComment({
+                owner,
+                repo,
+                commit_sha: sha,
+                body
+              });
+            } catch (error) {
+              console.log('ℹ️ Could not create failure comment - check workflow summary for details');
+            }
