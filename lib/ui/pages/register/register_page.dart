@@ -119,6 +119,7 @@ class _RegisterPageState extends State<RegisterPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                const SizedBox(height: 40),
                 const RegisterHeader(),
                 RegisterForm(
                   emailController: _emailController,

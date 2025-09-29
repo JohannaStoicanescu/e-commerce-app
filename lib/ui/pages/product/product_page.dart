@@ -134,152 +134,148 @@ class _ProductPageState extends State<ProductPage> {
       ),
       child: Padding(
         padding: const EdgeInsets.all(24),
-        child: Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                widget.product.title,
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                  height: 1.3,
-                ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              widget.product.title,
+              style: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+                height: 1.3,
               ),
-              const SizedBox(height: 12),
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      const Color(0xFF667EEA).withOpacity(0.1),
-                      const Color(0xFF764BA2).withOpacity(0.1)
-                    ],
-                  ),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Text(
-                  widget.product.category.toUpperCase(),
-                  style: const TextStyle(
-                    fontSize: 12,
-                    color: Color(0xFF667EEA),
-                    fontWeight: FontWeight.w600,
-                    letterSpacing: 1,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 5),
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                decoration: BoxDecoration(
-                  color: Colors.amber.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                      Icons.star_rounded,
-                      color: Colors.amber[600],
-                      size: 12,
-                    ),
-                    const SizedBox(width: 4),
-                    Text(
-                      widget.product.rating.rate.toStringAsFixed(1),
-                      style: TextStyle(
-                        fontSize: 10,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.amber[700],
-                      ),
-                    ),
-                    const SizedBox(width: 4),
-                    Text(
-                      '(${widget.product.rating.count})',
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.grey[600],
-                      ),
-                    ),
+            ),
+            const SizedBox(height: 12),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    const Color(0xFF667EEA).withOpacity(0.1),
+                    const Color(0xFF764BA2).withOpacity(0.1)
                   ],
                 ),
+                borderRadius: BorderRadius.circular(12),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+              child: Text(
+                widget.product.category.toUpperCase(),
+                style: const TextStyle(
+                  fontSize: 12,
+                  color: Color(0xFF667EEA),
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: 1,
+                ),
+              ),
+            ),
+            const SizedBox(height: 5),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+              decoration: BoxDecoration(
+                color: Colors.amber.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Icon(
-                    Icons.local_offer_rounded,
-                    color: Color(0xFF2C3E50),
-                    size: 21,
+                  Icon(
+                    Icons.star_rounded,
+                    color: Colors.amber[600],
+                    size: 12,
                   ),
-                  const SizedBox(width: 10),
+                  const SizedBox(width: 4),
                   Text(
-                    widget.product.formattedPrice,
-                    style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF2C3E50),
-                    ),
-                  ),
-                ],
-              ),
-              _buildAddToCartSection(),
-              const SizedBox(height: 24),
-              Row(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        colors: [
-                          Color.fromARGB(255, 147, 169, 255),
-                          Color.fromARGB(255, 75, 110, 248)
-                        ],
-                      ),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: const Icon(
-                      Icons.description_rounded,
-                      color: Colors.white,
-                      size: 20,
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  const Text(
-                    'Description',
+                    widget.product.rating.rate.toStringAsFixed(1),
                     style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF2C3E50),
+                      fontSize: 10,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.amber[700],
+                    ),
+                  ),
+                  const SizedBox(width: 4),
+                  Text(
+                    '(${widget.product.rating.count})',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.grey[600],
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 12),
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.grey[50],
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(
-                    color: Colors.grey[200]!,
-                    width: 1,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                const Icon(
+                  Icons.local_offer_rounded,
+                  color: Color(0xFF2C3E50),
+                  size: 21,
+                ),
+                const SizedBox(width: 10),
+                Text(
+                  widget.product.formattedPrice,
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF2C3E50),
                   ),
                 ),
-                child: Text(
-                  widget.product.description,
-                  style: TextStyle(
-                    fontSize: 16,
-                    height: 1.6,
-                    color: Colors.grey[700],
+              ],
+            ),
+            _buildAddToCartSection(),
+            const SizedBox(height: 24),
+            Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    gradient: const LinearGradient(
+                      colors: [
+                        Color.fromARGB(255, 147, 169, 255),
+                        Color.fromARGB(255, 75, 110, 248)
+                      ],
+                    ),
+                    borderRadius: BorderRadius.circular(8),
                   ),
+                  child: const Icon(
+                    Icons.description_rounded,
+                    color: Colors.white,
+                    size: 20,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                const Text(
+                  'Description',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF2C3E50),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.grey[50],
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(
+                  color: Colors.grey[200]!,
+                  width: 1,
                 ),
               ),
-            ],
-          ),
+              child: Text(
+                widget.product.description,
+                style: TextStyle(
+                  fontSize: 16,
+                  height: 1.6,
+                  color: Colors.grey[700],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

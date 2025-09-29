@@ -17,7 +17,7 @@ Ce document résume les adaptations plate-forme spécifiques implémentées dans
 
 ### ✅ 2. iOS - Interface Cupertino
 
-- **Page Détail Produit** : `PlatformProductDetailPage` avec `CupertinoPageScaffold`
+- **Page Détail Produit** : `ProductPage` avec `CupertinoPageScaffold`
 - **Styling iOS Natif** :
   - Navigation bar Cupertino avec bouton de partage
   - Boutons et alertes Cupertino
@@ -57,10 +57,10 @@ lib/ui/pages/_global_widgets/pwa_install_widget.dart
 - **Gestion d'états** : Loading, disponible, installé, erreur
 - **Intégration JavaScript** : Communication avec le service worker
 
-### Page Produit Plate-forme (`PlatformProductDetailPage`)
+### Page Produit Plate-forme (`ProductPage`)
 
 ```dart
-lib/ui/pages/products/platform_product_detail_page.dart
+lib/ui/pages/product/product_page.dart
 ```
 
 - **Interface Adaptative** :
@@ -115,7 +115,7 @@ dependencies:
 
 ### Structure de Navigation
 
-- Route `/product/{slug}` : Utilise `PlatformProductDetailPage`
+- Route `/product/{slug}` : Utilise `ProductPage`
 - Intégration dans `main.dart` avec navigation conditionnelle
 - Préservation des arguments de produit
 
@@ -141,7 +141,7 @@ dependencies:
 | ------------------------- | ------ | ---------------------------------------- |
 | Web PWA Manifest          | ✅     | `web/manifest.json` + `PWAInstallWidget` |
 | Web Bouton Install        | ✅     | Widget automatique avec JavaScript       |
-| iOS CupertinoPageScaffold | ✅     | `PlatformProductDetailPage`              |
+| iOS CupertinoPageScaffold | ✅     | `ProductPage`              |
 | Android Share Intent      | ✅     | `PlatformService` + `share_plus`         |
 
 **Résultat : 3/3 adaptations implémentées** (exigence ≥ 1 largement dépassée)
