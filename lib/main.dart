@@ -7,7 +7,7 @@ import 'ui/pages/checkout/checkout_page.dart';
 import 'ui/pages/home/home_page.dart';
 import 'ui/pages/login/login_page.dart';
 import 'ui/pages/orders/orders_page.dart';
-import 'ui/pages/products/platform_product_detail_page.dart';
+import 'ui/pages/product/product_page.dart';
 import 'ui/pages/products/products_page.dart';
 import 'ui/pages/register/register_page.dart';
 import 'ui/viewmodels/products_viewmodel.dart';
@@ -91,7 +91,7 @@ class MyApp extends StatelessWidget {
               }
 
               return MaterialPageRoute<void>(
-                builder: (_) => PlatformProductDetailPage(product: product),
+                builder: (_) => ProductPage(product: product),
                 settings: settings,
               );
             }

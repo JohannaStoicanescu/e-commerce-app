@@ -52,6 +52,7 @@ class EmptyCart extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     color: Color(0xFF2C3E50),
                   ),
+                  textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 12),
                 const Text(
@@ -77,11 +78,12 @@ class EmptyCart extends StatelessWidget {
                     elevation: 8,
                   ),
                   child: const Text(
-                    'DÉCOUVRIR NOS PRODUITS',
+                    'Découvrir nos produits',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       letterSpacing: 1,
                     ),
+                    textAlign: TextAlign.center,
                   ),
                 ),
               ],
