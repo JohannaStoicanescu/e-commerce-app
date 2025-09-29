@@ -1,4 +1,4 @@
-name: Deploy Flutter Web to GitHub Pages
+name: Deploy Flutter Web to GitHub Pages (Stable)
 
 on:
   push:
@@ -30,17 +30,27 @@ jobs:
       - name: Pub get
         run: flutter pub get
 
-      - name: Build Flutter (release)
+      - name: Build Flutter (stable release)
         run: |
           REPO_NAME="${GITHUB_REPOSITORY#*/}"
-          # Mets "/" si tu utilises un site user/org ou un domaine custom :
           BASE_HREF="/${REPO_NAME}/"
-          flutter build web --release --base-href "$BASE_HREF"
+          flutter build web --release --base-href "$BASE_HREF" --dart-define=ENVIRONMENT=production
 
-      - name: SPA 404 fallback
+      - name: Prepare stable deployment
         run: |
           cp build/web/index.html build/web/404.html
           touch build/web/.nojekyll
+
+          cat > build/web/deployment-info.json << EOF
+          {
+            "stable": {
+              "deployed_at": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+              "commit": "${GITHUB_SHA}",
+              "branch": "main",
+              "environment": "production"
+            }
+          }
+          EOF
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
